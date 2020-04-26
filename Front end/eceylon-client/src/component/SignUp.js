@@ -43,9 +43,11 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function SignUp() {
+  
   const classes = useStyles();
 
   return (
+    
     <div className="App" style={{backgroundImage: `url(${logo})` }}> 
     <Container component="main" maxWidth="xs" >
       
