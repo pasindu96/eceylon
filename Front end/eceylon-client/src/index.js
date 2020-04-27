@@ -11,7 +11,7 @@ import Signin from './component/signin/Signin';
 
 
 
-import Test from './component/Test';
+//import Test from './component/Test';
 ReactDOM.render(
   <React.StrictMode>
     <Router>

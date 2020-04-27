@@ -26,13 +26,20 @@ class Signin extends Component{
             lastName:"",
             mobile:"",
             address:"",
-            position:"",
+            position:""
         };
     }
+    
 
     onChange = e => {
         this.setState({
              [e.target.id]: e.target.value 
+        });
+    }
+
+    handleOptionChange=e => {
+        this.setState({
+          position: e.target.value
         });
     }
 
@@ -43,7 +50,8 @@ class Signin extends Component{
             password : this.state.password,
             name:this.state.firstname+" "+this.state.lastName,
             mobile:this.state.mobile,
-            address:this.state.address
+            address:this.state.address,
+            position:this.state.position
         };
         console.log(user);
         axios.post(`http://localhost:8080/api/eceylon/signin`, { 
@@ -51,7 +59,8 @@ class Signin extends Component{
             password:user.password,
             fullname:user.name,
             mobile:user.mobile,
-            address:user.address
+            address:user.address,
+            type:user.position
         })
         .then(res => {
           console.log(res);
@@ -60,6 +69,7 @@ class Signin extends Component{
     }
 
     render(){
+        
         
         return(
             <div className="App" style={{backgroundImage: `url(${logo})` }}> 
@@ -158,12 +168,16 @@ class Signin extends Component{
                                     <FormControlLabel
                                         value="buyer"
                                         control={<Radio color="primary" />}
-                                        label="Buyer"    
+                                        label="Buyer" 
+                                        onChange={this.handleOptionChange} 
+                                         
                                     />
                                     <FormControlLabel
                                         value="seller"
                                         control={<Radio color="primary" />}
                                         label="Seller"
+                                        onChange={this.handleOptionChange} 
+                                        
                                     />
 
                                     </RadioGroup>
