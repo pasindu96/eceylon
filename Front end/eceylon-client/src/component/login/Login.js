@@ -25,15 +25,18 @@ class Login extends Component{
         super();
         this.state = {
             email : "",
-            password : ""
+            password : "",
+            errors:{}
         };
     }
+
 
     onChange = e => {
         this.setState({
              [e.target.id]: e.target.value 
         });
     }
+    
 
     onSubmit = e => {
         e.preventDefault();
@@ -46,6 +49,8 @@ class Login extends Component{
         .then(res => {
           console.log(res);
           console.log(res.data);
+          if(res.data===true)
+            this.props.history.push("/signin");
         })
     }
 
@@ -72,9 +77,9 @@ class Login extends Component{
             },
           }));*/
 
-
+        const { email, password } = this.state;
+        const isEnabled = email.length > 0 && password.length > 0;
         
-
         return(
             <div className="App" style={{backgroundImage: `url(${logo})` }}>
                 <Container component="main" maxWidth="xs">
@@ -122,6 +127,7 @@ class Login extends Component{
                         fullWidth
                         variant="contained"
                         className="btn btn-primary"
+                        disabled={!isEnabled}
                         >
                         Login
                         </Button>
