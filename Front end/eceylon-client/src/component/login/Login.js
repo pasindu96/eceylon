@@ -49,7 +49,7 @@ class Login extends Component{
         .then(res => {
           console.log(res);
           console.log(res.data);
-          if(res.data===true)
+          if(res.data===    true)
             this.props.history.push("/signin");
         })
     }

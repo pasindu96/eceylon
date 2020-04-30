@@ -26,7 +26,8 @@ class Signin extends Component{
             lastName:"",
             mobile:"",
             address:"",
-            position:""
+            position:"buyer",
+            errors:{}
         };
     }
     
@@ -69,7 +70,9 @@ class Signin extends Component{
     }
 
     render(){
-        
+
+        const { email, password,firstname,lastName,mobile,address } = this.state;
+        const isEnabled = email.length > 0 && password.length > 0 && firstname.length > 0 && lastName.length > 0 && mobile.length > 0 && address.length > 0;
         
         return(
             <div className="App" style={{backgroundImage: `url(${logo})` }}> 
@@ -179,7 +182,6 @@ class Signin extends Component{
                                         onChange={this.handleOptionChange} 
                                         
                                     />
-
                                     </RadioGroup>
                                 </FormControl>
                             </Grid>
@@ -187,7 +189,7 @@ class Signin extends Component{
                             <Grid item xs={12}>
                                 <FormControlLabel
                                     control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                    label="I want to receive inspiration, marketing promotions and updates via email."
+                                    label=" I agree to the Eceylon.lk Membership Agreement & Privacy Policy "
                                 />
                                 </Grid>
                             </Grid>
@@ -201,6 +203,7 @@ class Signin extends Component{
                                 variant="contained"
                                 color="primary"
                                 className="btn btn-primary"
+                                disabled={!isEnabled}
                             >
                                 Sign Up
                             </Button>
@@ -210,7 +213,7 @@ class Signin extends Component{
                             <Grid container justify="flex-end">
                                 <Grid item>
                                     <Link href="login" variant="body2">
-                                        Already have an account? Sign in
+                                        Already have an account? Sign in..
                                     </Link>
                                 </Grid>
                             </Grid>
