@@ -50,9 +50,30 @@ class Login extends Component{
           console.log(res);
           console.log(res.data);
           if(res.data===    true)
-            this.props.history.push("/signin");
+            this.props.history.push("/main");
+            else{
+                alert('Invalid Username or Password !')
+                window.location.reload(true);
+            }
         })
     }
+    /*
+    handleChange=(event)=>{
+        event.preventDefault();
+        const{name,value}=event.target;
+        let errors=this.state.errors;
+        switch(name){
+            case 'email':
+                errors.email=value.length<5?'Invalid email':'';
+                break;
+            case 'password':
+                errors.password=value.length<8?'Invalid Password':'';
+                break;
+        }
+        this.setState({errors,[name]:value});
+    }
+    */
+    
 
 
     
@@ -79,58 +100,65 @@ class Login extends Component{
 
         const { email, password } = this.state;
         const isEnabled = email.length > 0 && password.length > 0;
+
         
         return(
             <div className="App" style={{backgroundImage: `url(${logo})` }}>
+                <br></br>
+                <h1 class="login-header"><b>User Login</b></h1>
                 <Container component="main" maxWidth="xs">
+                    <br></br>
+                    
+                    
                     <CssBaseline />
                     
                     <form  noValidate onSubmit={this.onSubmit}>
-                        <div className = "section">
-                        <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-
-                        onChange={this.onChange}
-                        value={this.state.email}
-
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
                         
-                        />
-                        <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
+                        <div className = "section">
+                            <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
 
-                        onChange={this.onChange}
-                        value={this.state.password}
+                            onChange={this.onChange}
+                            value={this.state.email}
 
-                        autoComplete="current-password"
-                        />
-                        <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                        />
-                        <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        className="btn btn-primary"
-                        disabled={!isEnabled}
-                        >
-                        Login
-                        </Button>
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                            />
+                            
+                            <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+
+                            onChange={this.onChange}
+                            value={this.state.password}
+
+                            autoComplete="current-password"
+                            />
+                            <FormControlLabel
+                            control={<Checkbox value="remember" color="primary" />}
+                            label="Remember me"
+                            />
+                            <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            className="btn btn-primary"
+                            disabled={!isEnabled}
+                            >
+                            Login
+                            </Button>
                         <div>
                             <br></br>
                         </div>
@@ -141,7 +169,7 @@ class Login extends Component{
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Link href="signup" variant="body2">
+                            <Link href="signin" variant="body2">
                             {"Don't have an account? Sign Up"}
                             </Link>
                         </Grid>

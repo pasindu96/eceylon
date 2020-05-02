@@ -76,8 +76,9 @@ class Signin extends Component{
         
         return(
             <div className="App" style={{backgroundImage: `url(${logo})` }}> 
+                <h1 class="login-header"><b>User Signup</b></h1>
                 <Container component="main" maxWidth="xs" >
-                
+
                     <CssBaseline />
                 
                     <form noValidate onSubmit={this.onSubmit}>
@@ -208,7 +209,7 @@ class Signin extends Component{
                                 Sign Up
                             </Button>
                             <div>
-                            <br></br>
+                            
                             </div>
                             <Grid container justify="flex-end">
                                 <Grid item>

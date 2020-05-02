@@ -21,7 +21,7 @@
     border-radius: 1em;
     padding: 1em;
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
@@ -254,4 +254,10 @@ $blue_theme: #70a1ff;
     background-color: white;
     color: #1032f3;
     border: 1px solid #1032f3;
+}
+
+
+.login-header{
+    text-align: center;
+    font-size: 3em;  
 }

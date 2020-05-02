@@ -20,7 +20,12 @@ public class UserController {
     @PostMapping(value="/login",consumes= MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean authenticateUser(@RequestBody UserDTO user){
-        return userService.authenticatebyEmail(user.getEmail(),user.getPassword());
+        //System.out.println(user);
+        if(user.getEmail()!=null){
+            return userService.authenticatebyEmail(user.getEmail(),user.getPassword());
+        }
+        else
+            return false;
     }
 
     @PostMapping(value="/signin",consumes= MediaType.APPLICATION_JSON_VALUE,

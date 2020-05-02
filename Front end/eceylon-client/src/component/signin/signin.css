@@ -255,3 +255,7 @@ $blue_theme: #70a1ff;
     color: #2bf310;
     border: 1px solid #1032f3;
 }
+.login-header{
+    text-align: center;
+    font-size: 2em;  
+}
