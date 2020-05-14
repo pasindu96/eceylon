@@ -1,31 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './index.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 //import App from './App';
 import * as serviceWorker from './serviceWorker';
-import SignUp from './component/SignUp';
-//import Login from './component/Login';
-import Login from './component/login/Login';
-import Signin from './component/signin/Signin';
+import Login from './components/login/Login';
+import Signup from './components/signup/Signup';
+import Homepage from './components/homepage/Homepage';
 
-
-
-//import Test from './component/Test';
 ReactDOM.render(
+
   <React.StrictMode>
     <Router>
-              <div className="col-md-6">
-                  <Switch>
-                      <Route path="/signup" exact component={SignUp} />
-                      <Route path="/login" exact component={Login} />
-                      <Route path="/signin" exact component={Signin}/>
-                      
-                      
-                  </Switch>
-              </div>
-          </Router>
+      <div>
+        <Switch>
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={Signup} />
+          <Route path="/homepage" exact component={Homepage} />
+          
+        </Switch>
+      </div>   
+    </Router>
   </React.StrictMode>,
+
   document.getElementById('root')
 );
 
