@@ -11,11 +11,11 @@ public class Product {
     private  double unitPrice;
     private String displayName;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name="categoryID")
     private Category category;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name="email")
     private User user;
 
