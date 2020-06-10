@@ -32,8 +32,15 @@ class Login extends Component{
           console.log(res.data);
           if(res.data!== ""){
                 console.log(res.data.fullname+ " : "+res.data.type);
-                this.props.history.push("/homepage");   
+                switch(res.data.type){
+                    case "seller":this.props.history.push("/sellerhome");break;
+                    case "buyer" :this.props.history.push("/homepage");break;
+                    case "admin" : this.props.history.push("/dashboard");break;
+                    default : window.location.reload(true);;
+                }
+                //this.props.history.push("/homepage");   
                 // localStorage.setItem('userID',user.email);   
+                
           } 
             else{
                 alert('Invalid Username or Password !')
@@ -50,7 +57,7 @@ class Login extends Component{
                     <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
                         <div className="card card-signin my-5">
                             <div className="card-body">
-                                <h5 className="card-title text-center">ECEYLON.COM <br/>Sign In</h5>
+                                <h5 className="card-title text-center">ECEYLON.LK <br/>Sign In</h5>
                                 <form className="form-signin" onSubmit={this.onSubmit}>
                                     <div className="form-label-group">
                                         <input type="email" id="email" name="email" className="form-control" placeholder="Email address"  onChange={this.onChange}

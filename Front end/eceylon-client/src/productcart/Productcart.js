@@ -44,18 +44,18 @@ class ProductCart extends Component{
                                                 <tr>
                                                     <th scope="row" className="border-0">
                                                         <div className="p-2">
-                                                        <img src="https://res.cloudinary.com/mhmd/image/upload/v1556670479/product-1_zrifhn.jpg" alt="" width="70" className="img-fluid rounded shadow-sm"/>
+                                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRYUYUEWGnH9d-McQZWhbM-_e6l_Ie2iW0KCfwsl3thLIeRo9bI&usqp=CAU" alt="" width="70" className="img-fluid rounded shadow-sm"/>
                                                         <div className="ml-3 d-inline-block align-middle">
-                                                            <h5 className="mb-0"> <a href="#" className="text-dark d-inline-block align-middle">Timex Unisex Originals</a></h5><span className="text-muted font-weight-normal font-italic d-block">Category: Watches</span>
+                                                            <h5 className="mb-0"> <a href="#" className="text-dark d-inline-block align-middle">Birthday cake 500g</a></h5><span className="text-muted font-weight-normal font-italic d-block">Category: Food Items</span>
                                                         </div>
                                                         </div>
                                                     </th>
-                                                    <td className="border-0 align-middle"><strong>$79.00</strong></td>
-                                                    <td className="border-0 align-middle"><strong>3</strong></td>
+                                                    <td className="border-0 align-middle"><strong>Rs 750.00</strong></td>
+                                                    <td className="border-0 align-middle"><strong>1</strong></td>
                                                     <td className="border-0 align-middle"><a href="#" className="text-dark"><i className="fa fa-trash"></i></a></td>
                                                 </tr>
                                                 
-                                                <tr>
+                                                {/* <tr>
                                                     <th scope="row">
                                                         <div className="p-2">
                                                         <img src="https://res.cloudinary.com/mhmd/image/upload/v1556670479/product-3_cexmhn.jpg" alt="" width="70" className="img-fluid rounded shadow-sm"/>
@@ -81,7 +81,7 @@ class ProductCart extends Component{
                                                     <td className="align-middle"><strong>$79.00</strong></td>
                                                     <td className="align-middle"><strong>3</strong></td>
                                                     <td className="align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
-                                                </tr>
+                                                </tr> */}
 
                                             </tbody>
                                         </table>
@@ -114,11 +114,11 @@ class ProductCart extends Component{
                                     <div className="p-4">
                                         <p className="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
                                         <ul className="list-unstyled mb-4">
-                                        <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Order Subtotal </strong><strong>$390.00</strong></li>
-                                        <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Shipping and handling</strong><strong>$10.00</strong></li>
-                                        <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Tax</strong><strong>$0.00</strong></li>
+                                        <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Order Subtotal </strong><strong>Rs 750.00</strong></li>
+                                        <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Shipping and handling</strong><strong>Rs 0.00</strong></li>
+                                        <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Tax</strong><strong>Rs 0.00</strong></li>
                                         <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Total</strong>
-                                            <h5 className="font-weight-bold">$400.00</h5>
+                                            <h5 className="font-weight-bold">Rs 750.00</h5>
                                         </li>
                                         </ul><a href="#" className="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
                                     </div>

@@ -5,7 +5,7 @@ import lk.ac.eceylon.entity.User;
 
 public interface UserService {
 
-    boolean authenticatebyEmail(String email,String password);
+    User authenticatebyEmail(String email,String password);
     //boolean authenticatebyUsername(String username,String password);
     boolean saveUser(UserDTO user);
     boolean findByemail(String email);

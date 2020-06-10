@@ -4,15 +4,15 @@ import java.util.Arrays;
 
 public class ProductImageDTO {
     private int imgID;
-    private byte[] image;
+    private String imageurl;
     private ProductDTO product;
 
     public ProductImageDTO() {
     }
 
-    public ProductImageDTO(int imgID, byte[] image, ProductDTO product) {
+    public ProductImageDTO(int imgID, String imageurl, ProductDTO product) {
         this.imgID = imgID;
-        this.image = image;
+        this.imageurl = imageurl;
         this.product = product;
     }
 
@@ -24,12 +24,12 @@ public class ProductImageDTO {
         this.imgID = imgID;
     }
 
-    public byte[] getImage() {
-        return image;
+    public String getImageurl() {
+        return imageurl;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
     }
 
     public ProductDTO getProduct() {
@@ -44,7 +44,7 @@ public class ProductImageDTO {
     public String toString() {
         return "ProductImageDTO{" +
                 "imgID=" + imgID +
-                ", image=" + Arrays.toString(image) +
+                ", imageurl='" + imageurl + '\'' +
                 ", product=" + product +
                 '}';
     }

@@ -9,17 +9,21 @@ public class ProductDTO {
     private String displayName;
     private CategoryDTO category;
     private UserDTO user;
+    private String deliveryArea;
+    private String subCategory;
 
     public ProductDTO() {
     }
 
-    public ProductDTO(int productID, String description, double unitPrice, String displayName, CategoryDTO category, UserDTO user) {
+    public ProductDTO(int productID, String description, double unitPrice, String displayName, CategoryDTO category, UserDTO user, String deliveryArea, String subCategory) {
         this.productID = productID;
         this.description = description;
         this.unitPrice = unitPrice;
         this.displayName = displayName;
         this.category = category;
         this.user = user;
+        this.deliveryArea = deliveryArea;
+        this.subCategory = subCategory;
     }
 
     public int getProductID() {
@@ -70,6 +74,22 @@ public class ProductDTO {
         this.user = user;
     }
 
+    public String getDeliveryArea() {
+        return deliveryArea;
+    }
+
+    public void setDeliveryArea(String deliveryArea) {
+        this.deliveryArea = deliveryArea;
+    }
+
+    public String getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
+    }
+
     @Override
     public String toString() {
         return "ProductDTO{" +
@@ -79,6 +99,8 @@ public class ProductDTO {
                 ", displayName='" + displayName + '\'' +
                 ", category=" + category +
                 ", user=" + user +
+                ", deliveryArea='" + deliveryArea + '\'' +
+                ", subCategory='" + subCategory + '\'' +
                 '}';
     }
 }

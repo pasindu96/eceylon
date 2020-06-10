@@ -1,90 +1,36 @@
 import React,{Component} from 'react';
 import NavBar from './NavBar';
-import '../homepage/homepage.css';
-import axios from "axios";
+import './homepage.css';
 
-
-
-
-class D extends Component{
-
-    async componentDidMount(){
-        axios.get(`http://localhost:8080/api/eceylon/products`)
-        .then(res => {
-          console.log(res);
-          console.log(res.data);
-        //   if(res.data!== ""){
-        //         console.log(res.data.fullname+ " : "+res.data.type);
-        //         switch(res.data.type){
-        //             case "seller":this.props.history.push("/sellerhome");break;
-        //             case "buyer" :this.props.history.push("/homepage");break;
-        //             case "admin" : this.props.history.push("/dashboard");break;
-        //             default : window.location.reload(true);;
-        //         }
-        //         //this.props.history.push("/homepage");   
-        //         // localStorage.setItem('userID',user.email);   
-                
-        //   } 
-        //     else{
-        //         alert('Invalid Username or Password !')
-        //         window.location.reload(true);
-        //     }
-        })
-    }
+class Homepage extends Component{
     render(){
         return(
-            <div className="container-fluid">
+            <div>
+                <NavBar/>
                 <div className="row">
-                    <div className="col-sm-2">
-                        <nav id="sidebar">
-                            <div className="sidebar-header">
-                                <h3>Categories</h3>
+                    <div className="col-2">
+                        <br></br>
+                        <h1>Categories</h1>
+                        <br></br>
+                        <ul className="navbar-nav ml-auto">
+                            <div className="btn-group-vertical btn-group-lg" role="group" aria-label="...">
+                                <button type="button" className="btn btn-secondary">Food Items</button>
+                                <button type="button" className="btn btn-secondary">Electronic Appliances</button>
+                                <button type="button" className="btn btn-secondary">Mobile Phones</button>
+                                <button type="button" className="btn btn-secondary">Handicrafts</button>
+                                <button type="button" className="btn btn-secondary">Paintings</button>
+                                <button type="button" className="btn btn-secondary">Masks</button>
+                                <button type="button" className="btn btn-secondary">Clothes</button>
+                                <button type="button" className="btn btn-secondary">Footwear</button>
+                                <button type="button" className="btn btn-secondary">Furnitures</button>
+                                <button type="button" className="btn btn-secondary">Jewellery</button>
+                                <button type="button" className="btn btn-secondary">Household Items</button>
+                                <button type="button" className="btn btn-secondary">Stationaries</button>
+
                             </div>
-                            <ul className="list-unstyled components">
-                                <li>
-                                    <a href="#" className="list-group-item" data-toggle="collapse" aria-expanded="true">Food Items</a>
-                                    <div className="collapse" id="menu1sub1">
-                                        <a href="#" className="list-group-item" data-parent="#menu1sub1">Subitem 1 a</a>
-                                        <a href="#" className="list-group-item" data-parent="#menu1sub1">Subitem 1 b</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#">Electronic Appliances</a>
-                                </li>
-                                <li>
-                                    <a href="#">Handicrafts</a>
-                                </li>
-                                <li>
-                                    <a href="#">Paintings</a>
-                                </li>
-                                <li>
-                                    <a href="#">Masks</a>
-                                </li>
-                                <li>
-                                    <a href="#">Clothes</a>
-                                </li>
-                                <li>
-                                    <a href="#">Footwear</a>
-                                </li>
-                                <li>
-                                    <a href="#">Furnitures</a>
-                                </li>
-                                <li>
-                                    <a href="#">Jewellery</a>
-                                </li>
-                                <li>
-                                    <a href="#">Stationaries</a>
-                                </li>
-                                <li>
-                                    <a href="#">Household items</a>
-                                </li>
-                            </ul>
-                        </nav>
+                        </ul>
                     </div>
-
-                    <div className="col-sm-10">
-                        <NavBar/>   
-
+                    <div className="col-10">
                         <div className="row">
                             <br></br>
                         </div>
@@ -109,7 +55,7 @@ class D extends Component{
                                         <div className="card-body">
                                             <h5 className="card-title">Birthday Cake 500g</h5>
                                             <p className="card-text">SLR 570.00</p>
-                                            <a href="/description">More details ...</a>
+                                            <a href="/product/{id}">More details ...</a>
                                         </div>
                                     </div>
                                 </div>
@@ -187,9 +133,9 @@ class D extends Component{
                             </div>    
                         </div>
                     </div>
-                </div>    
+                </div>
             </div>
         )
     }
 }
-export default D;
+export default Homepage;

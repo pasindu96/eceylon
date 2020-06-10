@@ -19,20 +19,21 @@ public class UserController {
 
     @PostMapping(value="/login",consumes= MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public boolean authenticateUser(@RequestBody UserDTO user){
+    public User authenticateUser(@RequestBody UserDTO user){
         //System.out.println(user);
         if(user.getEmail()!=null){
             return userService.authenticatebyEmail(user.getEmail(),user.getPassword());
         }
         else
-            return false;
+            return null;
     }
 
     @PostMapping(value="/signin",consumes= MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public boolean saveUser(@RequestBody UserDTO user) throws Exception {
-
-        System.out.println(user);
+//            if(userService.findByemail(user.getEmail())==true){
+//                return false;
+//            }
             return userService.saveUser(user);
     }
 

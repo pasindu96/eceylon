@@ -5,6 +5,13 @@ import Login from './login/Login';
 import Signup from './signup/Signup';
 import Homepage from './homepage/Homepage';
 import ProductCart from './productcart/Productcart';
+import Dashboard from './dashboard/Dashboard';
+import SellerHome from './homepageseller/SellerHome';
+import Description from './homepage/Description';
+import Approve from './dashboard/Approve';
+import Policy from './signup/Policy';
+import AddProduct from './homepageseller/AddProduct';
+import ViewOrder from './homepageseller/ViewOrder';
 
 
 class App extends Component{
@@ -15,6 +22,13 @@ class App extends Component{
           <Route path="/signup" exact component={Signup} />
           <Route path="/homepage" exact component={Homepage}/>
           <Route path="/cart" exact component={ProductCart}/>
+          <Route path="/dashboard" exact component={Dashboard}/>
+          <Route path="/sellerhome" exact component={SellerHome}/>
+          <Route path="/description" exact component={Description}/>
+          <Route path="/approve" exact component={Approve}/>
+          <Route path="/policy" exact component={Policy}/>
+          <Route path="/addproducts" exact component={AddProduct}/>
+          <Route path="/vieworder" exact component={ViewOrder}/>
       </Router>
     )
   }

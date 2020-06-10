@@ -19,15 +19,18 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean authenticatebyEmail(String email, String password) {
+    public User authenticatebyEmail(String email, String password) {
         boolean exists =userRepository.existsById(email);
         if (!exists){
-            return false;
+            return null;
         }
 
         User user = userRepository.findById(email).get();
 
-        return user.getPassword().equals(password);
+        if(user.getPassword().equals(password))
+            return user;
+        else
+            return null;
     }
 
 
@@ -49,7 +52,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean findByemail(String email) {
-        userRepository.findById(email);
-        return true;
+        if(userRepository.findById(email)!=null)
+            return true;
+        else
+            return false;
     }
 }

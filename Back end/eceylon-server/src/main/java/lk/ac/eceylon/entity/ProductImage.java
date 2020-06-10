@@ -1,25 +1,30 @@
 package lk.ac.eceylon.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.Arrays;
 
 @Entity
 public class ProductImage {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int imgID;
-    private byte[] image;
+    private String imageurl;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false,fetch = FetchType.LAZY )
     @JoinColumn(name="productID")
+    @Fetch(FetchMode.JOIN)
     private Product product;
 
-    public ProductImage(byte[] image, Product product) {
-        this.image = image;
+    public ProductImage(String imageurl, Product product) {
+        this.imageurl = imageurl;
         this.product = product;
     }
 
     public ProductImage() {
+
     }
 
     public int getImgID() {
@@ -30,12 +35,12 @@ public class ProductImage {
         this.imgID = imgID;
     }
 
-    public byte[] getImage() {
-        return image;
+    public String getImageurl() {
+        return imageurl;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
     }
 
     public Product getProduct() {
@@ -50,7 +55,7 @@ public class ProductImage {
     public String toString() {
         return "ProductImage{" +
                 "imgID=" + imgID +
-                ", image=" + Arrays.toString(image) +
+                ", imageurl='" + imageurl + '\'' +
                 ", product=" + product +
                 '}';
     }

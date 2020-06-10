@@ -18,7 +18,7 @@ class NavBar extends Component{
     render(){
         let userID = this.state.userID;
         return(
-            <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+            <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
 
                 <a className="navbar-brand" href="/homepage">
                     <h1>ECEYLON.LK</h1>

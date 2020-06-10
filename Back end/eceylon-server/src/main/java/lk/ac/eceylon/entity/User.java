@@ -1,13 +1,6 @@
 package lk.ac.eceylon.entity;
-
-import lk.ac.eceylon.dto.UsersType;
-
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
 
 @Entity
 public class User {

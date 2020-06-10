@@ -30,7 +30,15 @@
   .form-signin {
     width: 100%;
   }
-  
+  #policy{
+    font-size: 1em;
+    text-decoration: underline;
+    color: blue;
+  }
+
+  #warn{
+    color: red;
+  }
   .form-signin .btn {
     font-size: 80%;
     border-radius: 5rem;

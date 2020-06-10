@@ -1,5 +1,6 @@
 package lk.ac.eceylon.service.impl;
 
+import lk.ac.eceylon.entity.Product;
 import lk.ac.eceylon.entity.ProductImage;
 import lk.ac.eceylon.repository.ProductImageRepository;
 import lk.ac.eceylon.service.ProductImageService;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly =  true)
@@ -16,6 +19,29 @@ public class ProductImageServiceImpl implements ProductImageService {
 
     @Override
     public boolean saveImages(ProductImage image) {
-        return false;
+        Product product=new Product();
+        product.setProductID(image.getProduct().getProductID());
+        ProductImage img=new ProductImage();
+        img.setImageurl(image.getImageurl());
+        img.setProduct(product);
+
+        if(productImageRepository.save(img)==null)
+            return false;
+        else
+            return true;
+
     }
+
+    @Override
+    public List<ProductImage> getProduct(int productID) {
+        return productImageRepository.findProductImageByProductProductID(productID);
+        //return null;
+    }
+
+    @Override
+    public ProductImage getProductImage(int productID) {
+
+        return productImageRepository.findById(productID).get();
+    }
+
 }

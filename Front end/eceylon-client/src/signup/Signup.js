@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import './signup.css';
 import axios from "axios";
+import PopUp from './PopUp';
 
 class Signup extends Component{
 
@@ -16,6 +17,14 @@ class Signup extends Component{
             address2:"",
             address3:"",
             position:"buyer",
+            checked:true,
+            popup:"false",
+            errors:{
+                email:'',
+                firstname:'',
+                lastname:'',
+                mobile:''
+            }
         };
     }
     
@@ -31,6 +40,19 @@ class Signup extends Component{
           position: e.target.value
         });
     }
+
+    handleCheck=e=>{ 
+        this.setState({
+            checked: !this.state.checked
+        });
+      }
+
+    togglePop = () => {
+        this.setState({
+            popup: !this.state.popup
+        });
+    };
+
 
     onSubmit = e => {
         e.preventDefault();
@@ -63,7 +85,45 @@ class Signup extends Component{
         })
     }
 
+    handleChange = (event) => {
+        event.preventDefault();
+        const { name, value } = event.target;
+        let errors = this.state.errors;
+      
+        switch (name) {
+            case 'firstname': 
+                errors.firstname = 
+                value.length < 4
+                    ? 'First Name must be 4 characters long!'
+                    : '';
+                break;
+            case 'lastname': 
+                errors.lastname = 
+                value.length < 4
+                    ? 'Last Name must be 4 characters long!'
+                    : '';
+                break;
+                case 'mobile': 
+                errors.mobile = 
+                value.length < 10 || value.length>10
+                    ? 'Mobile must be 10 numbers long!'
+                    : '';
+                break;
+            default:
+                break;
+        }
+        
+        this.setState({errors, [name]: value}, ()=> {
+            //console.log(errors.firstname)
+        })
+    }
+    
+      
+
+    
+
     render(){
+        const checked=this.state.checked;
 
         return(
             <div className="container" >
@@ -71,7 +131,7 @@ class Signup extends Component{
                     <div className="col-sm-9 col-md-7 col-lg-8 mx-auto">
                         <div className="card card-signin my-5">
                             <div className="card-body">
-                                <h5 className="card-title text-center">ECEYLON.COM <br/>Signup</h5>
+                                <h5 className="card-title text-center">ECEYLON.LK <br/>Signup</h5>
                                 <form className="form-signin" onSubmit={this.onSubmit}>
                                 
                                     <div className="container">
@@ -79,15 +139,17 @@ class Signup extends Component{
                                             <div className="col-sm">
                                                 <div className="form-label-group">
                                                     <input type="text" id="firstname" name="firstname" className="form-control" placeholder="First name" onChange={this.onChange}
-                                                        value={this.state.firstname} required/>
+                                                        value={this.state.firstname} onChange={this.handleChange} required/>
                                                     <label htmlFor= "firstname">First Name</label>
+                                                    <span id="warn">{this.state.errors.firstname}</span>
                                                 </div>
                                             </div>
                                             <div className="col-sm">
                                                 <div className="form-label-group">
                                                     <input type="text" id="lastname" name="lastname" className="form-control" placeholder="Last name" onChange={this.onChange}
-                                                        value={this.state.lastname} required/>
+                                                        value={this.state.lastname}  onChange={this.handleChange} required/>
                                                     <label htmlFor= "lastname">Last Name</label>
+                                                    <span id="warn">{this.state.errors.lastname}</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -106,9 +168,11 @@ class Signup extends Component{
                                             <div className="col-sm">
                                                 <div className="form-label-group">
                                                     <input type="text" id="mobile" name="mobile" className="form-control" placeholder="Mobile number" onChange={this.onChange}
-                                                        value={this.state.mobile} required/>
+                                                        value={this.state.mobile}  onChange={this.handleChange} required/>
                                                     <label htmlFor= "mobile">Mobile Number</label>
+                                                    <span id="warn">{this.state.errors.mobile}</span>
                                                 </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -148,7 +212,7 @@ class Signup extends Component{
 
                                             <div className="col-sm">
                                                 <div className="form-check form-check-inline" >
-                                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="buyer"onChange={this.handleOptionChange} />
+                                                    <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="buyer" onChange={this.handleOptionChange} />
                                                     <label className="form-check-label" htmlFor="inlineRadio1">Buyer</label>
                                                 </div>
                                             </div>
@@ -170,13 +234,17 @@ class Signup extends Component{
                                     <div className="container">
                                         <div className="row">
                                             <div className="form-check form-check-inline">
-                                                <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="true"/>
-                                                <label className="form-check-label" htmlFor="inlineCheckbox1"> By creating an account, you agree to the ECEYLON.LK Agreement and Privacy Policy  </label>
+                                                {/* handleCheck={this.handleCheck()} */}
+                                                <input className="form-check-input" type="checkbox" onChange={this.handleCheck}/>
+                                                {/* {this.togglePop} onClick={this.togglePop} */}
+                                                <label className="form-check-label" htmlFor="inlineCheckbox1"> By creating an account, you agree to the ECEYLON.LK<a id="policy" href="/policy"> Agreement and Privacy Policy  </a></label>
+                                                {this.state.popup ? <PopUp toggle={this.togglePop} /> : null}    
                                             </div>
                                         </div>
                                     </div>
                                     <br></br>
-                                    <button className="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+                                    {/* disabled={isEnabled} */}
+                                    <button className="btn btn-lg btn-primary btn-block text-uppercase" id="submitbutton"type="submit" disabled={checked} >Sign in</button>
                                     <br></br>
                                     <a href="/login" className="link">Already have an account? Sign in..</a>
                                 </form>
