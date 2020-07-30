@@ -1,21 +1,59 @@
 import React,{Component} from 'react';
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 class NavBar extends Component{
+    
     constructor(){
         super();
         this.state = {
-            email : "",
-            username:""        
+            search: "",
+            username:localStorage.getItem('username').toString() , 
+            email:localStorage.getItem('email').toString()  
         };
         // alert(this.username);
     }
 
+    onChange = e => {
+        this.setState({
+             [e.target.id]: e.target.value 
+        });
+    }
+
+    onSubmit = e => {
+        e.preventDefault();
+        const user = {
+            searchItem : this.state.search,
+            user : {email:this.state.email},
+            categoryID:"0"
+        };
+        axios.post(`http://localhost:8080/api/eceylon/search`, user)
+        .then(res => {
+            // localStorage.setItem('categoryid','1');  
+            // localStorage.setItem('categoryid',res.data);
+            // console.log(localStorage.getItem('categoryid').toString());
+            // console.log(res.data);
+            if(res.data!== ""){
+                localStorage.setItem('categoryid',res.data);
+                console.log(localStorage.getItem('categoryid').toString());
+                // this.props.history.push('/homepage');
+                window.location.href = '/homepage';        
+            }
+        });
+
+
+        //This shit cause the error --------------------> please check again bro..yack... I'm totally hate this shit
+        // window.location.href = '/homepage';
+        // this.props.history.push('/homepage');
+
+    }
     // currentUser = e =>{
     //     return this.username;
     
     // }
 
     render(){
+        
         let userID = this.state.userID;
         return(
             <nav className="navbar navbar-expand-xl navbar-dark bg-dark">
@@ -28,12 +66,19 @@ class NavBar extends Component{
                     aria-controls="basicExampleNav1" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
+
+                
                
                 <div className="collapse navbar-collapse" id="basicExampleNav1">
 
-             
-                    <ul className="navbar-nav ml-auto">
-
+                
+                    <ul className=" navbar-nav ml-auto">
+                        
+                        <form className="form-inline my-2 my-lg-0" onSubmit={this.onSubmit}>
+                            <input className="form-control mr-sm-2" type="text" id="search" name="search" placeholder="Search products"  onChange={this.onChange}
+                                value={this.state.search}/>
+                            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
                         <li className="nav-item">
                             <a href="/cart" className="nav-link waves-effect">
                             <img src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-svg-png-icon-download-28.png" width="30" height="30" className="d-inline-block align-top" alt=""/>
@@ -46,41 +91,52 @@ class NavBar extends Component{
                             Wishlist
                             </a>
                         </li>
-                        
-                        <li className="nav-item pl-2 mb-2 mb-md-0">
+                        {/* nav-item pl-2 mb-2 mb-md-0 */}
+                        <li className="nav-item pl-2 mb-2 mb-md-0 dropdown"> 
                             
                             <a href="/homepage" type="button" className="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
                                 <img src="https://img.icons8.com/plasticine/2x/user.png" width="30" height="30" className="d-inline-block align-top" alt=""/>
-                                Pasindu Wijesinghe</a>
+                                {this.state.username}
+                            </a>
+                            
+                            <ul className="dropdown-menu">
+                                <li><a href="#" className="dropdown-item">Log Out</a></li>
+                            </ul>
+
                         </li>
                     
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle waves-effect" id="navbarDropdownMenuLink3" data-toggle="dropdown"
+                            <a href="/login" type="button" className="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
+                                Logout
+                            </a>
+                            {/* <ul className="dropdown-menu">
+                                <li><a href="#" className="dropdown-item">Log Out</a></li>
+                            </ul> */}
+                        {/* nav-link dropdown-toggle waves-effect */}
+                            {/* <a className="nav-link dropdown-toggle waves-effect" id="navbarDropdownMenuLink3" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="true" href="/homepage">
                             <i className="united kingdom flag m-0"></i>
-                            </a>
-                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            </a> */}
+                            {/* <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <div className="dropdown-content">
                                     <a href="/sa">Link 1</a>
                                     <a href="/sa">Link 2</a>
                                     <a href="/sa">Link 3</a>
                                 </div>
-                            </div>
+                            </div> */}
+                            {/* <ul className="dropdown-menu">
+                                <li><a href="#" className="dropdown-item">Log Out</a></li>
+                            </ul> */}
                         </li>
-
                     </ul>
-
                 </div>
-
             </nav>
-
-                      
-            
-
         )
     }
 }
 export default NavBar;
+
+
 
 /*
 

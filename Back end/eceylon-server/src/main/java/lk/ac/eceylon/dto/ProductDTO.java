@@ -10,12 +10,13 @@ public class ProductDTO {
     private CategoryDTO category;
     private UserDTO user;
     private String deliveryArea;
+    private int qty_on_hand;
     private String subCategory;
 
     public ProductDTO() {
     }
 
-    public ProductDTO(int productID, String description, double unitPrice, String displayName, CategoryDTO category, UserDTO user, String deliveryArea, String subCategory) {
+    public ProductDTO(int productID, String description, double unitPrice, String displayName, CategoryDTO category, UserDTO user, String deliveryArea,int qty_on_hand, String subCategory) {
         this.productID = productID;
         this.description = description;
         this.unitPrice = unitPrice;
@@ -23,6 +24,7 @@ public class ProductDTO {
         this.category = category;
         this.user = user;
         this.deliveryArea = deliveryArea;
+        this.qty_on_hand=qty_on_hand;
         this.subCategory = subCategory;
     }
 
@@ -90,6 +92,14 @@ public class ProductDTO {
         this.subCategory = subCategory;
     }
 
+    public int getQty_on_hand() {
+        return qty_on_hand;
+    }
+
+    public void setQty_on_hand(int qty_on_hand) {
+        this.qty_on_hand = qty_on_hand;
+    }
+
     @Override
     public String toString() {
         return "ProductDTO{" +
@@ -100,6 +110,7 @@ public class ProductDTO {
                 ", category=" + category +
                 ", user=" + user +
                 ", deliveryArea='" + deliveryArea + '\'' +
+                ", qty_on_hand=" + qty_on_hand +
                 ", subCategory='" + subCategory + '\'' +
                 '}';
     }

@@ -31,6 +31,12 @@ class Login extends Component{
           console.log(res);
           console.log(res.data);
           if(res.data!== ""){
+
+                localStorage.setItem('username',res.data.fullname);  
+                localStorage.setItem('email',user.email); 
+                localStorage.setItem('categoryid',1);  
+
+
                 console.log(res.data.fullname+ " : "+res.data.type);
                 switch(res.data.type){
                     case "seller":this.props.history.push("/sellerhome");break;

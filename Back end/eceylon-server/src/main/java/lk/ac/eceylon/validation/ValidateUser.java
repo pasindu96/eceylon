@@ -41,7 +41,6 @@ public class ValidateUser {
         if(type==UserTypes.buyer.toString() || type==(UserTypes.seller).toString()  || type==(UserTypes.admin).toString() )
             return true;
         else
-            return true;
+            return false;
     }
-
 }

@@ -25,15 +25,42 @@ public class ProductController {
         return productService.saveProduct(product);
 //        return true;
     }
+//    @GetMapping(value="/product/{id}",
+//            produces = MediaType.APPLICATION_JSON_VALUE)
+//    public Product getProduct(@PathVariable("id") String id){
+//        //int i=Integer.parseInt(id);
+////        System.out.println(id.replace("id=",""));
+//        return productService.getProduct(Integer.parseInt(id.replace("id=","")));
+//    }
+
+    //--------------------------------> Use this to list from category id <----------------------------------
+//    @GetMapping(value="/product/{id}",
+//            produces = MediaType.APPLICATION_JSON_VALUE)
+//    public List<Product> getProduct(@PathVariable("id") String id){
+//        //int i=Integer.parseInt(id);
+////        System.out.println(id.replace("id=",""));
+//        System.out.println(id);
+//        //return productService.getProduct(Integer.parseInt(id.replace("id=","")));
+//        return productService.getProduct(Integer.parseInt(id.replace("id=","")));
+//    }
+
     @GetMapping(value="/product/{id}",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Product getProduct(@PathVariable("id") String id){
         //int i=Integer.parseInt(id);
 //        System.out.println(id.replace("id=",""));
-        return productService.getProduct(Integer.parseInt(id.replace("id=","")));
+        //return productService.getProduct(Integer.parseInt(id.replace("id=","")));
+        return productService.getProductByID(Integer.parseInt(id.replace("id=","")));
     }
+
     @GetMapping(value="/products",produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Product> getAllProducts(){
         return productService.getAllProducts();
+    }
+
+    @GetMapping(value="/products/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Product> getProductByCategory(@PathVariable("id") String id){
+        return productService.getProduct(Integer.parseInt(id.replace("id=","")));
     }
 }

@@ -50,11 +50,22 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+
     @Override
-    public boolean findByemail(String email) {
-        if(userRepository.findById(email)!=null)
-            return true;
-        else
-            return false;
+    public User findByemail(String email) {
+        try {
+            User u=new User();
+            u= userRepository.findById(email).get();
+            if(u!=null){
+                return u;
+            }else{
+                u.setEmail("No user");
+                return u;
+            }
+        }catch(Exception ex){
+            User u=new User();
+            u.setEmail("No user");
+            return u;
+        }
     }
 }

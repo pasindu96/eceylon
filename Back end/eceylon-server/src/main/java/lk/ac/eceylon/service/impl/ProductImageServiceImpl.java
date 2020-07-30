@@ -22,7 +22,7 @@ public class ProductImageServiceImpl implements ProductImageService {
         Product product=new Product();
         product.setProductID(image.getProduct().getProductID());
         ProductImage img=new ProductImage();
-        img.setImageurl(image.getImageurl());
+        img.setImageurl(image.getImageurl().replace("C:\\fakepath\\", ""));
         img.setProduct(product);
 
         if(productImageRepository.save(img)==null)

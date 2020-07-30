@@ -5,7 +5,11 @@ import NavBar from '../homepage/NavBar';
 class ProductCart extends Component{
     constructor(){
         super();
+        this.state = {
+              
+        };
     }
+
     render(){
         return(
             <div>

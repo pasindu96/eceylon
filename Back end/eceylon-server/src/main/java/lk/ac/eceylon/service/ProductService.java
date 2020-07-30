@@ -9,6 +9,10 @@ import java.util.List;
 
 public interface ProductService {
     Product saveProduct(ProductDTO product);
-    Product getProduct(int id);
+    //Product getProduct(int id);
+    List<Product> getProduct(int id);
+    Product getProductByID(int id);
+    List<Product> getCategoryByProductName(String name);
+
     List<Product> getAllProducts();
 }

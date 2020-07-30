@@ -12,6 +12,10 @@ import Approve from './dashboard/Approve';
 import Policy from './signup/Policy';
 import AddProduct from './homepageseller/AddProduct';
 import ViewOrder from './homepageseller/ViewOrder';
+import IncomeReport from './homepageseller/IncomeReport';
+import Indexpage from './homepage/Index';
+import Viewproduct from './homepageseller/Viewproduct';
+
 
 
 class App extends Component{
@@ -29,6 +33,9 @@ class App extends Component{
           <Route path="/policy" exact component={Policy}/>
           <Route path="/addproducts" exact component={AddProduct}/>
           <Route path="/vieworder" exact component={ViewOrder}/>
+          <Route path="/report" exact component={IncomeReport}/>
+          <Route path="/index" exact component={Indexpage}/>
+          <Route path="/viewproduct" exact component={Viewproduct}/>
       </Router>
     )
   }

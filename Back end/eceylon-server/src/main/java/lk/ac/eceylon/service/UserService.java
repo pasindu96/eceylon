@@ -8,6 +8,7 @@ public interface UserService {
     User authenticatebyEmail(String email,String password);
     //boolean authenticatebyUsername(String username,String password);
     boolean saveUser(UserDTO user);
-    boolean findByemail(String email);
+    //boolean findByemail(String email);
+    User findByemail(String email);
 
 }

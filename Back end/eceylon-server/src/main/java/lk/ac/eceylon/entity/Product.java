@@ -11,6 +11,7 @@ public class Product {
     private  double unitPrice;
     private String displayName;
     private String delivery_Area;
+    private int qty_on_hand;
 
     @ManyToOne(optional = false)
     @JoinColumn(name="categoryID")
@@ -25,13 +26,14 @@ public class Product {
     public Product() {
     }
 
-    public Product(String description, double unitPrice, String displayName, String delivery_Area, Category category, String subCategory, User user) {
+    public Product(String description, double unitPrice, String displayName, String delivery_Area, Category category,int qty_on_hand, String subCategory, User user) {
         this.description = description;
         this.unitPrice = unitPrice;
         this.displayName = displayName;
         this.delivery_Area = delivery_Area;
         this.category = category;
         this.subCategory = subCategory;
+        this.qty_on_hand=qty_on_hand;
         this.user = user;
     }
 
@@ -99,6 +101,14 @@ public class Product {
         this.subCategory = subCategory;
     }
 
+    public int getQty_on_hand() {
+        return qty_on_hand;
+    }
+
+    public void setQty_on_hand(int qty_on_hand) {
+        this.qty_on_hand = qty_on_hand;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -107,6 +117,7 @@ public class Product {
                 ", unitPrice=" + unitPrice +
                 ", displayName='" + displayName + '\'' +
                 ", delivery_Area='" + delivery_Area + '\'' +
+                ", qty_on_hand=" + qty_on_hand +
                 ", category=" + category +
                 ", subCategory='" + subCategory + '\'' +
                 ", user=" + user +

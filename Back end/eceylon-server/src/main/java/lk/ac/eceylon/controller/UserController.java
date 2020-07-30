@@ -37,13 +37,9 @@ public class UserController {
             return userService.saveUser(user);
     }
 
-   @GetMapping(value="/login/{id}",consumes= MediaType.APPLICATION_JSON_VALUE)
-    public boolean findByemail(@PathVariable(value = "id")  String id) throws Exception {
-        try{
-            return userService.findByemail(id);
-        }catch(Exception e){
-            System.out.println(e+"");
-            return false;
-        }
+   @GetMapping(value="/user/{id}",produces= MediaType.APPLICATION_JSON_VALUE)
+    public User findByemail(@PathVariable(value = "id")  String id) throws Exception {
+        id=id.replace("id=","");
+        return userService.findByemail(id);
     }
 }

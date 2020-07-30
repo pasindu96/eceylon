@@ -16,7 +16,10 @@ class SellerHome extends Component{
                             <a href="/vieworder">View Orders</a>
                         </li>
                         <li>
-                            <a href="#">Ratings</a>
+                            <a href="/viewproduct">View Products</a>
+                        </li>
+                        <li>
+                            <a href="/report">Income Reports</a>
                         </li>
                         <li>
                             <a href="/login">Log out</a>

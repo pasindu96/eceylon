@@ -37,6 +37,7 @@ public class ProductServiceImpl implements ProductService {
         product.setUnitPrice(productDTO.getUnitPrice());
         product.setDisplayName(productDTO.getDisplayName());
         product.setCategory(category);
+        product.setQty_on_hand(productDTO.getQty_on_hand());
         product.setUser(user);
         product.setDelivery_Area(productDTO.getDeliveryArea());
         product.setSubCategory(productDTO.getSubCategory());
@@ -44,11 +45,27 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.save(product);
     }
 
+//    @Override
+//    @Transactional(propagation = Propagation.REQUIRED)
+//    public Product getProduct(int id) {
+//
+//        return productRepository.findById(id).get();
+//    }
+
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public Product getProduct(int id) {
+    public List<Product> getProduct(int id) {
+        return productRepository.findProductByCategoryCategoryID(id);
+    }
 
+    @Override
+    public Product getProductByID(int id) {
         return productRepository.findById(id).get();
+    }
+
+    @Override
+    public List<Product> getCategoryByProductName(String name) {
+        return productRepository.findProductByDisplayNameContaining(name);
     }
 
     @Override

@@ -11,12 +11,13 @@ class AddProduct extends Component{
             delivery_area:"",
             category:"1",
             sub_category:"",
+            qty_on_hand:"",
             product_image:[],
             product_image1:"",
             product_image2:"",
             product_image3:"",
             description:"",
-            email:"pasi@icloud.com"
+            email:localStorage.getItem('email').toString()
         };
     }
     onChange = e => {
@@ -36,27 +37,29 @@ class AddProduct extends Component{
             sub_category:this.state.sub_category,
             product_image:[this.state.product_image1,this.state.product_image2,this.state.product_image3],
             description:this.state.description,
-            email:this.state.email
+            email:this.state.email,
+            qty_on_hand:this.state.qty_on_hand
 
         };
-        // console.log(product);
+        console.log(product);
         axios.post(`http://localhost:8080/api/eceylon/product`, 
-            { 
-                description:product.description,
-                unitPrice:product.unit_price,
-                displayName:product.display_name,
-                deliveryArea:product.delivery_area,
-                subCategory:product.sub_category,
-                category:{categoryID : product.category},
-                user:{email:product.email}    
-            }
+        { 
+            description:product.description,
+            unitPrice:product.unit_price,
+            displayName:product.display_name,
+            deliveryArea:product.delivery_area,
+            subCategory:product.sub_category,
+            qty_on_hand:product.qty_on_hand,
+            category:{categoryID : product.category},
+            user:{email:product.email}    
+        }
         )
         .then(res => {
-          console.log(res);
-          console.log(res.data);
-          var pid=res.data.productID;
+        console.log(res);
+        console.log(res.data);
+        var pid=res.data.productID;
         //   console.log("ID : "+ res.data.productID);
-          if(res.data!== ""){
+        if(res.data!== ""){
             for(var i=0;i<3;i++){
                 
                 axios.post(`http://localhost:8080/api/eceylon/image`, 
@@ -90,6 +93,7 @@ class AddProduct extends Component{
                 window.location.reload(true);
             }
         })
+        
     }
     render(){
         return(
@@ -108,7 +112,10 @@ class AddProduct extends Component{
                                     <a href="/vieworder">View Orders</a>
                                 </li>
                                 <li>
-                                    <a href="#">Ratings</a>
+                                    <a href="/viewproduct">View Products</a>
+                                </li>
+                                <li>
+                                    <a href="/report">Income Reports</a>
                                 </li>
                                 <li>
                                     <a href="/login">Log out</a>
@@ -136,9 +143,14 @@ class AddProduct extends Component{
                                                         <label htmlFor= "description">Product Description</label>
                                                 </div>
                                                 <div className="form-label-group">
-                                                    <input type="text" id="unit_price" name="unit_price" className="form-control" placeholder="Unit Price"  onChange={this.onChange}
+                                                    <input type="text" id="unit_price" name="unit_price" className="form-control" placeholder="Unit Price" step="0.01" onChange={this.onChange}
                                                         value={this.state.unit_price}required/>
                                                         <label htmlFor= "unit_price">Unit Price</label>
+                                                </div>
+                                                <div className="form-label-group">
+                                                    <input type="number" id="qty_on_hand" name="qty_on_hand" className="form-control" placeholder="Quantity on hand" onChange={this.onChange}
+                                                        value={this.state.qty_on_hand}required/>
+                                                        <label htmlFor= "qty_on_hand">Quantity On Hand</label>
                                                 </div>
                                             
                                                 <div className="form-label-group">
@@ -154,7 +166,7 @@ class AddProduct extends Component{
                                                         <div className="col-3">
                                                             <select id="category" name="category" value={this.state.value} onChange={this.onChange}>            
                                                                 <option value="1">Food Items</option>
-                                                                <option value="2">Electronic Appliances</option>
+                                                                <option value="2">Jewellery</option>
                                                                 <option value="3">Mobile Phones</option>
                                                                 <option value="4">Handicrafts</option>
                                                                 <option value="5">Paintings</option>
@@ -162,7 +174,7 @@ class AddProduct extends Component{
                                                                 <option value="7">Clothes</option>
                                                                 <option value="8">Footwear</option>
                                                                 <option value="9">Furnitures</option>
-                                                                <option value="10">Jewellery</option>
+                                                                <option value="10">Electronic Appliances</option>
                                                                 <option value="11">Household Items</option>
                                                                 <option value="12">Stationaries</option>
 

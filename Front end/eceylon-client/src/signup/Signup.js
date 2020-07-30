@@ -106,7 +106,7 @@ class Signup extends Component{
                 case 'mobile': 
                 errors.mobile = 
                 value.length < 10 || value.length>10
-                    ? 'Mobile must be 10 numbers long!'
+                    ? 'Mobile number must be 10 numbers long!'
                     : '';
                 break;
             default:
@@ -139,7 +139,7 @@ class Signup extends Component{
                                             <div className="col-sm">
                                                 <div className="form-label-group">
                                                     <input type="text" id="firstname" name="firstname" className="form-control" placeholder="First name" onChange={this.onChange}
-                                                        value={this.state.firstname} onChange={this.handleChange} required/>
+                                                        value={this.state.firstname} onChange={this.handleChange} maxLength="30" required/>
                                                     <label htmlFor= "firstname">First Name</label>
                                                     <span id="warn">{this.state.errors.firstname}</span>
                                                 </div>
@@ -147,7 +147,7 @@ class Signup extends Component{
                                             <div className="col-sm">
                                                 <div className="form-label-group">
                                                     <input type="text" id="lastname" name="lastname" className="form-control" placeholder="Last name" onChange={this.onChange}
-                                                        value={this.state.lastname}  onChange={this.handleChange} required/>
+                                                        value={this.state.lastname}  onChange={this.handleChange} maxLength="30" required/>
                                                     <label htmlFor= "lastname">Last Name</label>
                                                     <span id="warn">{this.state.errors.lastname}</span>
                                                 </div>
@@ -161,14 +161,14 @@ class Signup extends Component{
                                             <div className="col-sm">
                                                 <div className="form-label-group">
                                                     <input type="email" id="email" name="email" className="form-control" placeholder="Email address"  onChange={this.onChange}
-                                                        value={this.state.email}required/>
+                                                        value={this.state.email} required/>
                                                     <label htmlFor= "email"> Email address</label>
                                                 </div>
                                             </div>
                                             <div className="col-sm">
                                                 <div className="form-label-group">
-                                                    <input type="text" id="mobile" name="mobile" className="form-control" placeholder="Mobile number" onChange={this.onChange}
-                                                        value={this.state.mobile}  onChange={this.handleChange} required/>
+                                                    <input type="number" id="mobile" name="mobile"  className="form-control" placeholder="Mobile number" onChange={this.onChange}
+                                                        value={this.state.mobile}  onChange={this.handleChange}  required/>
                                                     <label htmlFor= "mobile">Mobile Number</label>
                                                     <span id="warn">{this.state.errors.mobile}</span>
                                                 </div>

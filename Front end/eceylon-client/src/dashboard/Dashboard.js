@@ -13,9 +13,9 @@ class Dashboard extends Component{
                         <h3>Admin Dashboard</h3>
                     </div>
                     <ul className="list-unstyled components">
-                        <li>
+                        {/* <li>
                             <a href="#" >Approve Sellers</a>
-                        </li>
+                        </li> */}
                         <li>
                             <a href="#">View Sales Report</a>
                         </li>
@@ -24,6 +24,9 @@ class Dashboard extends Component{
                         </li>
                         <li>
                             <a href="#">Manage Prodcuts</a>
+                        </li>
+                        <li>
+                            <a href="#">Most Serached Products</a>
                         </li>
                         <li>
                             <a href="/homepage">Homepage</a>
