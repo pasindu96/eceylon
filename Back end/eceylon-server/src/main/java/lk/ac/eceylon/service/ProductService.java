@@ -13,6 +13,7 @@ public interface ProductService {
     List<Product> getProduct(int id);
     Product getProductByID(int id);
     List<Product> getCategoryByProductName(String name);
-
+    List<Product> getProductByUser(String email);
     List<Product> getAllProducts();
+    boolean updateProduct(Product product);
 }

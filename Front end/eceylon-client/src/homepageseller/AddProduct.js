@@ -58,6 +58,7 @@ class AddProduct extends Component{
         console.log(res);
         console.log(res.data);
         var pid=res.data.productID;
+
         //   console.log("ID : "+ res.data.productID);
         if(res.data!== ""){
             for(var i=0;i<3;i++){

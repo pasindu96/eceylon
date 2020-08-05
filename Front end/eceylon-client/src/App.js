@@ -22,7 +22,7 @@ class App extends Component{
   render(){
     return(
       <Router>
-          <Route path="/login" exact component={Login} />
+          <Route path="/" exact component={Login} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/homepage" exact component={Homepage}/>
           <Route path="/cart" exact component={ProductCart}/>

@@ -9,8 +9,8 @@ public class OrderDetails {
     private int odID;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name="email")
-    private User user;
+    @JoinColumn(name="orderid")
+    private Orders order;
 
     @ManyToOne(optional = false)
     @JoinColumn(name="productID")
@@ -18,8 +18,8 @@ public class OrderDetails {
 
     private int quantity;
 
-    public OrderDetails(User user, Product product, int quantity) {
-        this.user = user;
+    public OrderDetails(Orders order, Product product, int quantity) {
+        this.order = order;
         this.product = product;
         this.quantity = quantity;
     }
@@ -27,12 +27,20 @@ public class OrderDetails {
     public OrderDetails() {
     }
 
-    public User getUser() {
-        return user;
+    public int getOdID() {
+        return odID;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setOdID(int odID) {
+        this.odID = odID;
+    }
+
+    public Orders getOrder() {
+        return order;
+    }
+
+    public void setOrder(Orders order) {
+        this.order = order;
     }
 
     public Product getProduct() {
@@ -54,7 +62,8 @@ public class OrderDetails {
     @Override
     public String toString() {
         return "OrderDetails{" +
-                "user=" + user +
+                "odID=" + odID +
+                ", order=" + order +
                 ", product=" + product +
                 ", quantity=" + quantity +
                 '}';

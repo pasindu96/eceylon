@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly =  true)
 public class OrderServiceImpl implements OrderService {
@@ -16,8 +18,26 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     @Override
-    public boolean saveOrder(Orders order) {
-        if(orderRepository.save(order)!=null)
+    public Orders saveOrder(Orders order) {
+//        if(orderRepository.save(order)!=null)
+//            return true;
+//        else
+//            return false;
+        return orderRepository.save(order);
+    }
+
+    @Override
+    public List<Orders> getOrdersByOrderIDAndStatus(int orderid) {
+        return orderRepository.findOrdersByOrderidAndStatus(orderid,"Not confirmed");
+//        return orderRepository.findOrdersByOrderid(orderid);
+
+    }
+
+    @Override
+    public boolean confirmOrder(Orders order) {
+        Orders orderToUpdate=orderRepository.getOne(order.getOrderid());
+        orderToUpdate.setStatus("Confirmed");
+        if(orderRepository.save(orderToUpdate)!=null)
             return true;
         else
             return false;

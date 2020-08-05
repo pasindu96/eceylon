@@ -13,7 +13,9 @@
     padding: 8px;
   }
   
-  #students tr:nth-child(even){background-color: #f2f2f2;}
+  #students tr:nth-child(even){background-color: #c8fad9;}
+  #students tr:nth-child(odd){background-color: #e4faec;}
+
   
   #students tr:hover {background-color: #ddd;}
   

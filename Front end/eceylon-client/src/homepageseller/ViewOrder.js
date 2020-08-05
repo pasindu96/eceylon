@@ -1,7 +1,69 @@
 import React,{Component} from 'react';
 import './vieworder.css';
+import axios from 'axios';
 
 class ViewOrder extends Component{
+
+    constructor(){
+        super();
+        this.state={
+            orders:[],
+            user:[]
+        };
+    }
+    async componentDidMount(){
+
+        axios.get(`http://localhost:8080/api/eceylon/orders/email=`+localStorage.getItem('email').toString())
+        .then(res => {
+            console.log(res.data);
+            this.setState({
+                    orders : res.data
+                })
+        })
+
+    }
+    renderTableData() {
+        return this.state.orders.map((order, index) => {
+           const { orderID, quantity, amount, date,productID,displayName,email, name, address,mobile } = order 
+           return (
+                <tr key={orderID}>
+                    {/* <td onClick={() => this.onClick(productID, description, displayName, price,delivery_area,qty_on_hand,categoryid)}>{productID}</td> */}
+                    <td>{orderID}</td>
+                    <td>{displayName}</td>
+                    <td>{quantity}</td>
+                    <td>{amount}</td>
+                    <td>{date}</td>
+                    <td>{email}</td>
+                    <td>{name}</td>
+                    <td>{address}</td>
+                    <td>{mobile}</td>
+                    <td><button onClick={() => this.onClick(orderID)}>Confirm Order</button></td>
+                </tr>
+           )
+        })
+     }
+
+     onChange = e => {
+        this.setState({
+             [e.target.id]: e.target.value 
+        });
+    }
+
+    onClick(oid){
+        axios.post('http://localhost:8080/api/eceylon/order/confirm',{orderid:oid})
+        .then(res => {
+            if(res.data ===true){
+                alert("Order confirmed...")
+                window.location.reload(true);
+            }else{
+                alert("Error occured...");
+                window.location.reload(true);
+            }
+
+        })
+        // alert(orderid);
+    }
+
     render(){
         return(
             <div className="container-fluid">
@@ -39,78 +101,41 @@ class ViewOrder extends Component{
                             <div className="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
 
                                 <div className="table-responsive">
-                                    <table className="table">
-                                        <thead>
+                                    <table id='orders' className="table" style={{border:'border: 3px solid #ddd'}} >
+                                        <tbody>
                                             <tr>
                                                 <th scope="col" className="border-0 bg-light">
                                                     <div className="p-2 px-3 text-uppercase">Order ID</div>
                                                 </th>
                                                 <th scope="col" className="border-0 bg-light">
-                                                    <div className="p-2 px-3 text-uppercase">Product</div>
-                                                </th>
-                                                <th scope="col" className="border-0 bg-light">
-                                                    <div className="py-2 text-uppercase">Price</div>
+                                                    <div className="p-2 px-3 text-uppercase">Display Name</div>
                                                 </th>
                                                 <th scope="col" className="border-0 bg-light">
                                                     <div className="py-2 text-uppercase">Quantity</div>
                                                 </th>
                                                 <th scope="col" className="border-0 bg-light">
-                                                    <div className="py-2 text-uppercase">Confirm</div>
+                                                    <div className="py-2 text-uppercase">Amount</div>
                                                 </th>
                                                 <th scope="col" className="border-0 bg-light">
-                                                    <div className="py-2 text-uppercase">Reject</div>
+                                                    <div className="py-2 text-uppercase">Date</div>
+                                                </th>
+                                                <th scope="col" className="border-0 bg-light">
+                                                    <div className="py-2 text-uppercase">Email</div>
+                                                </th>
+                                                <th scope="col" className="border-0 bg-light">
+                                                    <div className="py-2 text-uppercase">Name</div>
+                                                </th>
+                                                <th scope="col" className="border-0 bg-light">
+                                                    <div className="py-2 text-uppercase">Address</div>
+                                                </th>
+                                                <th scope="col" className="border-0 bg-light">
+                                                    <div className="py-2 text-uppercase">Mobile</div>
+                                                </th>
+                                                <th scope="col" className="border-0 bg-light">
+                                                    <div className="py-2 text-uppercase">Confirm Order</div>
                                                 </th>
                                             </tr>
-                                        </thead>
-
-                                        <tbody>
-                                            <tr>
-                                                
-                                                <td className="border-0 align-middle"><strong>3</strong></td>
-                                                <td className="border-0 align-middle"><strong>Chocolate cake 750g</strong></td>
-                                                <td className="border-0 align-middle"><strong>Rs 750.00</strong></td>
-                                                <td className="border-0 align-middle"><strong>1</strong></td>
-                                                <td className="border-0 align-middle"><a href="#" className="text-dark"><i className="fa fa-check"></i></a></td>
-                                                <td className="border-0 align-middle"><a href="#" className="text-dark"><i className="fa fa-window-close"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                
-                                                <td className="border-0 align-middle"><strong>11</strong></td>
-                                                <td className="border-0 align-middle"><strong>Chocolate cake 750g</strong></td>
-                                                <td className="border-0 align-middle"><strong>Rs 750.00</strong></td>
-                                                <td className="border-0 align-middle"><strong>2</strong></td>
-                                                <td className="border-0 align-middle"><a href="#" className="text-dark"><i className="fa fa-check"></i></a></td>
-                                                <td className="border-0 align-middle"><a href="#" className="text-dark"><i className="fa fa-window-close"></i></a></td>
-                                            </tr>
-                                            
-                                            {/* <tr>
-                                                <th scope="row">
-                                                    <div className="p-2">
-                                                    <img src="https://res.cloudinary.com/mhmd/image/upload/v1556670479/product-3_cexmhn.jpg" alt="" width="70" className="img-fluid rounded shadow-sm"/>
-                                                    <div className="ml-3 d-inline-block align-middle">
-                                                        <h5 className="mb-0"><a href="#" className="text-dark d-inline-block">Lumix camera lense</a></h5><span className="text-muted font-weight-normal font-italic">Category: Electronics</span>
-                                                    </div>
-                                                    </div>
-                                                </th>
-                                                <td className="align-middle"><strong>$79.00</strong></td>
-                                                <td className="align-middle"><strong>3</strong></td>
-                                                <td className="align-middle"><a href="#" className="text-dark"><i className="fa fa-trash"></i></a></td>
-                                            </tr>
-
-                                            <tr>
-                                                <th scope="row">
-                                                    <div className="p-2">
-                                                        <img src="https://res.cloudinary.com/mhmd/image/upload/v1556670479/product-2_qxjis2.jpg" alt="" width="70" className="img-fluid rounded shadow-sm"/>
-                                                        <div className="ml-3 d-inline-block align-middle">
-                                                            <h5 className="mb-0"> <a href="#" className="text-dark d-inline-block">Gray Nike running shoe</a></h5><span className="text-muted font-weight-normal font-italic">Category: Fashion</span>
-                                                        </div>
-                                                    </div>
-                                                </th>
-                                                <td className="align-middle"><strong>$79.00</strong></td>
-                                                <td className="align-middle"><strong>3</strong></td>
-                                                <td className="align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
-                                            </tr> */}
-
+                                                {this.renderTableData()}
                                         </tbody>
                                     </table>
                                 </div>

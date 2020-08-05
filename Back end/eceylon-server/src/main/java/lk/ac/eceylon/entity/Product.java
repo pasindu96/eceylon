@@ -37,6 +37,7 @@ public class Product {
         this.user = user;
     }
 
+
     public int getProductID() {
         return productID;
     }

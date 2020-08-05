@@ -14,11 +14,11 @@ class D extends Component{
             pid : []
         };
         // alert(localStorage.getItem('categoryid').toString());
-        axios.get(`http://localhost:8080/api/eceylon/products/id=`+localStorage.getItem('categoryid').toString())
+        axios.get(`http://localhost:8080/api/eceylon/productl/id=`+localStorage.getItem('categoryid').toString())
         .then(res => {
-            
+            console.log(res.data);
             this.setState({
-                products: res.data
+                testdata: res.data
             })
             
             //this.products=res.data;
@@ -26,13 +26,13 @@ class D extends Component{
             for(var i=0;i<=res.data.length-1;i++){
                // console.log(res.data[i]);
                this.state.displayName.push(res.data[i].displayName);
-               this.state.unitPrice.push("SLR " + res.data[i].unitPrice + ".00");
+               this.state.unitPrice.push("SLR " + res.data[i].price + ".00");
                this.state.productID.push(res.data[i].productID);
             //    user.pid.push(res.data[i].productID);
 
             //    this.state.lol.push("a");
             //    var url="test";
-               if(res.data[i].productID<9){
+            //    if(res.data[i].productID<9){
 
                 //Check theese part
 
@@ -49,7 +49,7 @@ class D extends Component{
                             
                     // })
 
-                }
+                // }
 
                 
 
@@ -81,7 +81,8 @@ class D extends Component{
             unitPrice:[],
             qty_on_hand:[],
             images:[],
-            lol:[]
+            lol:[],
+            testdata:[]
         }
     }
     
@@ -107,7 +108,7 @@ class D extends Component{
                                     </div> */}
                                 </li>
                                 <li>
-                                    <a href="#">Electronic Appliances</a>
+                                    <a href="#" >Electronic Appliances</a>
                                 </li>
                                 <li>
                                     <a href="#">Handicrafts</a>
@@ -153,7 +154,7 @@ class D extends Component{
                         <div className="row">
                                 <div className="col-3">
                                     <div className="card" >
-                                        <img className="bd-placeholder-img card-img-top" width="100%" height="180" src={require('../resources/c1.jpg')}  alt="ImFound"/>
+                                        <img className="bd-placeholder-img card-img-top" width="100%" height="180" src={require('../resources/b1.jpg')}  alt="ImFound"/>
                                         <div className="card-body">
                                             <h5 className="card-title">{this.state.displayName[0]}</h5>
                                             <p className="card-text">{this.state.unitPrice[0]}</p>

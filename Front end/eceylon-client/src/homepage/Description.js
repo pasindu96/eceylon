@@ -15,8 +15,8 @@ class Description extends Component{
             displayName:"null",
             unitPrice:"null" ,
             deliveryArea:"null",
-            qty:2,
-            price: 1000,
+            qty:"",
+            price: "",
             status:"No"  
         }
     }
@@ -39,7 +39,9 @@ class Description extends Component{
 
                 this.setState({
                     qty_on_hand:(res.data.qty_on_hand),
+                    // qty:res.data.qty_on_hand,
                     unitPrice:("Rs "+res.data.unitPrice+".00"),
+                    price:res.data.unitPrice, 
                     displayName:(res.data.displayName),
                     description:(res.data.description),
                     deliveryArea:(res.data.delivery_Area)
@@ -71,6 +73,12 @@ class Description extends Component{
         })
     }
 
+    onChange = e => {
+        this.setState({
+             [e.target.id]: e.target.value 
+        });
+    }
+
     onSubmit = e => {
         e.preventDefault();
         const cart = {
@@ -82,12 +90,12 @@ class Description extends Component{
         };
         axios.post(`http://localhost:8080/api/eceylon/cart`, cart)
         .then(res => {
-          console.log(res);
-          console.log(res.data);
-          if(res.data!== ""){
-            
-             
-          } 
+            console.log(res);
+            console.log(res.data);
+            if(res.data!== ""){
+                setTimeout("location.href = 'description'",2000);
+                
+            } 
             else{
                 alert('Can\'t add to your cart !')
                 window.location.reload(true);
@@ -144,6 +152,7 @@ class Description extends Component{
                                 <h4 className="price">current price : <span>{this.state.unitPrice}</span></h4>
                                 <h4 className="price">Delivery Area : <span>{this.state.deliveryArea}</span></h4>
                                 <h4 className="price">Available Quantity : <span>{this.state.qty_on_hand}</span></h4>
+                                <h4 className="price">Quantity : <input type="number" id="qty" name="qty" min="0" max={this.state.qty_on_hand} onChange={this.onChange} required/></h4>
                                 <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong></strong></p>
                                 
                                 <div className="row">

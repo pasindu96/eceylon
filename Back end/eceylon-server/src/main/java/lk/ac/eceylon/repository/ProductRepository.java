@@ -14,5 +14,5 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
     List<Product> findProductByDisplayNameLike(@Param("displayName") String displayName);
     List<Product>  findProductByCategoryCategoryID(@Param("categoryID") int categoryID);
     List<Product> findProductByDisplayNameContaining(@Param("displayName") String displayName);
-
+    List<Product> findProductByUserEmail(@Param("email") String email);
 }

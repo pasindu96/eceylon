@@ -21,6 +21,8 @@ public class Orders {
     @JoinColumn(name="email")
     private User user;
 
+    private String status;
+
     public Orders() {
     }
 
@@ -43,6 +45,13 @@ public class Orders {
     }
 
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public double getAmount() {
         return amount;
@@ -75,6 +84,7 @@ public class Orders {
                 ", orderdate=" + orderdate +
                 ", amount=" + amount +
                 ", user=" + user +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

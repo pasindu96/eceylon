@@ -68,9 +68,29 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findProductByDisplayNameContaining(name);
     }
 
+
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public boolean updateProduct(Product product) {
+        Product productToUpdate = productRepository.getOne(product.getProductID());
+        productToUpdate.setQty_on_hand(product.getQty_on_hand());
+        productToUpdate.setDisplayName(product.getDisplayName());
+        productToUpdate.setQty_on_hand(product.getQty_on_hand());
+        productToUpdate.setUnitPrice(product.getUnitPrice());
+        productToUpdate.setDelivery_Area(product.getDelivery_Area());
+        productToUpdate.setDescription(product.getDescription());
+        productRepository.save(productToUpdate);
+        return true;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public List<Product> getProductByUser(String email) {
+        return productRepository.findProductByUserEmail(email);
     }
 }

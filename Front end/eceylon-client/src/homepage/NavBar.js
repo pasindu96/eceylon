@@ -106,7 +106,7 @@ class NavBar extends Component{
                         </li>
                     
                         <li className="nav-item dropdown">
-                            <a href="/login" type="button" className="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
+                            <a href="/" type="button" className="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
                                 Logout
                             </a>
                             {/* <ul className="dropdown-menu">
