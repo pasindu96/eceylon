@@ -9,7 +9,10 @@ class NavBar extends Component{
         this.state = {
             search: "",
             username:localStorage.getItem('username').toString() , 
-            email:localStorage.getItem('email').toString()  
+            email:localStorage.getItem('email').toString(),
+            checked:'false',
+            filter:'',
+            check:localStorage.getItem('filter')==="1" ? true:false
         };
         // alert(this.username);
     }
@@ -18,6 +21,26 @@ class NavBar extends Component{
         this.setState({
              [e.target.id]: e.target.value 
         });
+    }
+    handleCheck=e=>{ 
+        var checked = e.target.checked;
+        if(checked){
+            localStorage.setItem('filter',"1");
+            // this.setState({
+            //     defaultChecked:true
+            // })
+            setTimeout("location.href = 'homepage'",500);
+
+            //reload homepage here
+        }else{
+            localStorage.setItem('filter',"2");
+            // this.setState({
+            //     defaultChecked:false
+            // })
+            setTimeout("location.href = 'homepage'",500);
+            //reload homepage here
+        }
+        
     }
 
     onSubmit = e => {
@@ -76,25 +99,35 @@ class NavBar extends Component{
                         
                         <form className="form-inline my-2 my-lg-0" onSubmit={this.onSubmit}>
                             <input className="form-control mr-sm-2" type="text" id="search" name="search" placeholder="Search products"  onChange={this.onChange}
-                                value={this.state.search}/>
+                                value={this.state.search} required/>
                             <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                         <li className="nav-item">
+                            {/* <a href="#" className="nav-link waves-effect"> */}
+                            <ol>
+                            <p  style={{color: "#FFFFFF", fontSize:"15px", fontFamily:"bold"}} >Filter</p>
+
+                            <input className="form-check-input" type="checkbox" name="filter" id="inlineCheckbox1" onChange={this.handleCheck} checked={this.state.check} />
+                            <label className="form-check-label" htmlFor="inlineCheckbox1" style={{color: "#FFFFFF"}}> Price low - high </label>
+
+
+                            {/* <img src="https://cdn1.iconfinder.com/data/icons/instagram-ui-flat/48/Instagram_UI-07-512.png" width="30" height="30" className="d-inline-block align-top" alt=""/>
+                            Wishlist */}
+                            </ol>
+                            {/* </a> */}
+                        </li>
+                        <li className="nav-item">
+                            
                             <a href="/cart" className="nav-link waves-effect">
                             <img src="https://www.freepnglogos.com/uploads/shopping-cart-png/shopping-cart-svg-png-icon-download-28.png" width="30" height="30" className="d-inline-block align-top" alt=""/>
                             My Cart
                             </a>
                         </li>
-                        <li className="nav-item">
-                            <a href="/wishlist" className="nav-link waves-effect">
-                            <img src="https://cdn1.iconfinder.com/data/icons/instagram-ui-flat/48/Instagram_UI-07-512.png" width="30" height="30" className="d-inline-block align-top" alt=""/>
-                            Wishlist
-                            </a>
-                        </li>
+                        
                         {/* nav-item pl-2 mb-2 mb-md-0 */}
                         <li className="nav-item pl-2 mb-2 mb-md-0 dropdown"> 
                             
-                            <a href="/homepage" type="button" className="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
+                            <a href="/profile" type="button" className="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
                                 <img src="https://img.icons8.com/plasticine/2x/user.png" width="30" height="30" className="d-inline-block align-top" alt=""/>
                                 {this.state.username}
                             </a>

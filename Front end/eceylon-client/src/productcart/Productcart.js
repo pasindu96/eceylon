@@ -11,7 +11,7 @@ class ProductCart extends Component{
               orderSubTotal:0,
               total:0,
               errors:{
-                card:'',
+                credit:'',
                 cvv:'',
             },
             credit:'',
@@ -71,13 +71,13 @@ class ProductCart extends Component{
         switch (id) {
             case 'credit': 
                 errors.credit = 
-                (value.length !== 16)
+                (value.length !== 16 || isNaN(value) )
                     ? 'Credit card must be 16 digits long !'
                     : '';
                 break;
             case 'cvv': 
                 errors.cvv = 
-                (value.length === 3)
+                (value.length !== 3 || isNaN(value))
                     ? 'CVV must be 3 characters long !'
                     : '';
                 break;
@@ -110,6 +110,7 @@ class ProductCart extends Component{
      }
 
      onSubmit = e => {
+        
         e.preventDefault();
         const product = {
             user : {email:localStorage.getItem('email').toString()},
@@ -117,24 +118,32 @@ class ProductCart extends Component{
             status:"Not confirmed"
         };
         const oid=3;
-        axios.post(`http://localhost:8080/api/eceylon/order`,product)
-        .then(res => {
-            oid=res.data.orderid;
-            console.log(res.data.orderid);
-            console.log(res.data.orderid);
-        })
-        setTimeout("2000");
+        if(this.state.products.length===0){
+            alert("No Products in your cart ! ");
+        }else{
+            if(this.state.products.credit==='' || this.state.cvv===''){
+                alert("Please enter the credit card details !");
+            }else{
+                axios.post(`http://localhost:8080/api/eceylon/order`,product)
+                .then(res => {
+                    oid=res.data.orderid;
+                    console.log(res.data.orderid);
+                    console.log(res.data.orderid);
+                })
+                //setTimeout("2000");
 
-        for(var i=0;i<this.state.products.length;i++){
-            // axios.post(`http://localhost:8080/api/eceylon/orderdetail`,{order:{orderID:1},product:{productID:this.state.products[i].productID},quantity:this.state.products[i].orderQty})
-            axios.post(`http://localhost:8080/api/eceylon/orderdetail`,{orderid:oid,productid:this.state.products[i].productID,quantity:this.state.products[i].orderQty,cartid:this.state.products[i].cartID})
-            .then(res => {
-                console.log(res);
-            })
+                for(var i=0;i<this.state.products.length;i++){
+                    // axios.post(`http://localhost:8080/api/eceylon/orderdetail`,{order:{orderID:1},product:{productID:this.state.products[i].productID},quantity:this.state.products[i].orderQty})
+                    axios.post(`http://localhost:8080/api/eceylon/orderdetail`,{orderid:24,productid:this.state.products[i].productID,quantity:this.state.products[i].orderQty,cartid:this.state.products[i].cartID})
+                    .then(res => {
+                        console.log(res);
+                    })
+                }
+
+                setTimeout("location.href = 'cart'",1000);
+                // window.location.reload(true);
+            }
         }
-
-        setTimeout("location.href = 'cart'",2000);
-        // window.location.reload(true);
     }
     render(){
         return(
@@ -221,13 +230,13 @@ class ProductCart extends Component{
                                         <label htmlFor="credit">Credit Card Number</label>
                                         <div className="input-group mb-4 border rounded-pill p-2">
                                         {/* onChange={this.handleChange}  */}
-                                            <input className="number" min="0" maxLength="16" id="credit" name="credit" onChange={this.onChange} placeholder="Credit card number"  className="form-control border-0" required/>
-                                            <span id="warn">{this.state.errors.card}</span>
+                                            <input className="number" min="0" maxLength="16" id="credit" name="credit" onChange={this.onChange} onChange={this.handleChange}  placeholder="Credit card number"  className="form-control border-0" required/>
+                                            <span id="warn">{this.state.errors.credit}</span>
                                         </div>
                                         <label htmlFor="cvv">CVV Number</label>
                                         <div className="input-group mb-4 border rounded-pill p-2">
                                         {/* onChange={this.handleChange} */}
-                                            <input className="number" min="0" maxLength="3" id="cvv" name="cvv" placeholder="CVV number"  onChange={this.onChange} className="form-control border-0"required/>
+                                            <input className="number" min="0" maxLength="3" id="cvv" name="cvv" placeholder="CVV number"  onChange={this.onChange} onChange={this.handleChange} className="form-control border-0"required/>
                                             <span id="warn">{this.state.errors.cvv}</span>
                                         </div>
                                         {/* <p className="font-italic mb-4">If you have some information for the seller you can leave them in the box below</p>

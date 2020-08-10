@@ -39,7 +39,7 @@ class ViewOrder extends Component{
                     <td>{mobile}</td>
                     <td><button onClick={() => this.onClick(orderID)}>Confirm Order</button></td>
                 </tr>
-           )
+            )
         })
      }
 

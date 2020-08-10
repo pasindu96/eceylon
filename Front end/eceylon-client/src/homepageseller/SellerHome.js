@@ -27,7 +27,7 @@ class SellerHome extends Component{
                     </ul>
                 </nav>
                 <div id="content">
-                    <p>This area should load the relevant components when the sidebar button click</p>
+                    <p></p>
                 </div>
             </div>
         )

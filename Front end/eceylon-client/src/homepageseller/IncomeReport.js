@@ -2,6 +2,9 @@ import React,{Component} from 'react';
 import NavBar from '../homepage/NavBar';
 
 class IncomeReport extends Component{
+
+
+    
     render(){
         return(
             <div className="container-fluid">
@@ -72,8 +75,8 @@ class IncomeReport extends Component{
                                                 </div>
                                                 <div className="form-label-group">
                                                     <input type="text" id="income" name="income" className="form-control" 
-                                                        value="10600.00/=" disabled/>
-                                                        <label htmlFor= "income">Income</label>
+                                                        value="10600" disabled/>
+                                                        <label htmlFor= "income">Income [LKR]</label>
                                                 </div>
                                                 {/*
                                                 <div className="form-label-group">

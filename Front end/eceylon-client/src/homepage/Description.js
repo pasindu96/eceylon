@@ -17,7 +17,8 @@ class Description extends Component{
             deliveryArea:"null",
             qty:"",
             price: "",
-            status:"No"  
+            status:"No"  ,
+            useremail:""
         }
     }
 
@@ -44,7 +45,8 @@ class Description extends Component{
                     price:res.data.unitPrice, 
                     displayName:(res.data.displayName),
                     description:(res.data.description),
-                    deliveryArea:(res.data.delivery_Area)
+                    deliveryArea:(res.data.delivery_Area),
+                    useremail:(res.data.user.fullname)
                 })
                 
 
@@ -93,7 +95,8 @@ class Description extends Component{
             console.log(res);
             console.log(res.data);
             if(res.data!== ""){
-                setTimeout("location.href = 'description'",2000);
+                alert("Added to the product cart !")
+                setTimeout("location.href = 'description'",1000);
                 
             } 
             else{
@@ -146,21 +149,29 @@ class Description extends Component{
                                         <span className="fa fa-star"></span>
                                         <span className="fa fa-star"></span>
                                     </div>
-                                    <span className="review-no">41 reviews</span>
+                                    {/* <span className="review-no">41 reviews</span> */}
                                 </div>
                                 <p className="product-description">{this.state.description}</p>
                                 <h4 className="price">current price : <span>{this.state.unitPrice}</span></h4>
                                 <h4 className="price">Delivery Area : <span>{this.state.deliveryArea}</span></h4>
                                 <h4 className="price">Available Quantity : <span>{this.state.qty_on_hand}</span></h4>
-                                <h4 className="price">Quantity : <input type="number" id="qty" name="qty" min="0" max={this.state.qty_on_hand} onChange={this.onChange} required/></h4>
-                                <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong></strong></p>
+                                {/* <h4 className="price">Quantity : <input type="number" id="qty" name="qty" min="0" max={this.state.qty_on_hand} onChange={this.onChange} required/></h4>
+                                <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong></strong></p> */}
                                 
                                 <div className="row">
-                                    <form style={{width:'200px'}} onSubmit={this.onSubmit}>
+                                    
+                                    <form style={{width:'1000px'}} onSubmit={this.onSubmit}>
+                                    <h4 className="price">Quantity : <input type="number" id="qty" name="qty" min="0" max={this.state.qty_on_hand} onChange={this.onChange} required/></h4>
+                                    <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong></strong></p>
                                         <div className="col-md-4">
                                             <button className="add-to-cart btn btn-default" type="submit" style={{width:'200px'}} >Add to cart</button>
                                         </div>
                                     </form>
+                                    
+                                    <div className="col-md-8">
+                                        <br/>
+                                        <p className="vote"><strong>Seller: </strong> {this.state.useremail} <strong></strong></p>
+                                    </div>
                                     {/* <div className="col-md-8">
                                         <button className="like btn btn-default" type="button"><span className="fa fa-heart"></span></button>
                                     </div> */}

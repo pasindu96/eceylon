@@ -15,6 +15,8 @@ import ViewOrder from './homepageseller/ViewOrder';
 import IncomeReport from './homepageseller/IncomeReport';
 import Indexpage from './homepage/Index';
 import Viewproduct from './homepageseller/Viewproduct';
+import Profile from './dashboard/Profile';
+import ProductDashboard from './dashboard/ProductDashboard';
 
 
 
@@ -27,6 +29,7 @@ class App extends Component{
           <Route path="/homepage" exact component={Homepage}/>
           <Route path="/cart" exact component={ProductCart}/>
           <Route path="/dashboard" exact component={Dashboard}/>
+          <Route path="/productdashboard" exact component={ProductDashboard}/>
           <Route path="/sellerhome" exact component={SellerHome}/>
           <Route path="/description" exact component={Description}/>
           <Route path="/approve" exact component={Approve}/>
@@ -36,6 +39,7 @@ class App extends Component{
           <Route path="/report" exact component={IncomeReport}/>
           <Route path="/index" exact component={Indexpage}/>
           <Route path="/viewproduct" exact component={Viewproduct}/>
+          <Route path="/profile" exact component={Profile}/>
       </Router>
     )
   }

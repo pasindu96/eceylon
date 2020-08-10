@@ -25,6 +25,12 @@ class Login extends Component{
             email : this.state.email,
             password : this.state.password
         };
+        axios.get('http://localhost:8080/api/eceylon/category/email='+user.email)
+        .then(res=>{
+            localStorage.setItem('categoryid',res.data); 
+            console.log(res.data); 
+        })
+
         console.log(user);
         axios.post(`http://localhost:8080/api/eceylon/login`, { email:user.email,password:user.password})
         .then(res => {
@@ -34,7 +40,6 @@ class Login extends Component{
 
                 localStorage.setItem('username',res.data.fullname);  
                 localStorage.setItem('email',user.email); 
-                localStorage.setItem('categoryid',1);  
 
 
                 console.log(res.data.fullname+ " : "+res.data.type);

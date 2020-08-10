@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @Service
 @Transactional(propagation = Propagation.SUPPORTS, readOnly =  true)
 
@@ -23,5 +27,29 @@ public class SearchServiceImpl implements SearchService {
             return true;
         else
             return false;
+    }
+
+    @Override
+    public int mostSearchedCategory(String email) {
+        List<Search> searchResults=searchRepository.findSearchByUserEmail(email);
+        List<Integer> catList=new ArrayList<Integer>();
+        int searchCount=0;
+        int mostSearchedCategoryID=0;
+        int tempValue=0;
+
+        for (Search search :searchResults) {
+            catList.add(search.getCategoryID());
+        }
+        for(int i=1;i<16;i++){
+            tempValue=Collections.frequency(catList,i);
+            if(searchCount < tempValue){
+                mostSearchedCategoryID=i;
+                searchCount=tempValue;
+            }
+        }
+        if(searchCount==0)
+            return 1;
+        else
+            return mostSearchedCategoryID;
     }
 }

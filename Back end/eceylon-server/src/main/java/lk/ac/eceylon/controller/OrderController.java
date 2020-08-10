@@ -4,6 +4,7 @@ import lk.ac.eceylon.dto.UserOrdersDTO;
 import lk.ac.eceylon.entity.OrderDetails;
 import lk.ac.eceylon.entity.Orders;
 import lk.ac.eceylon.entity.Product;
+import lk.ac.eceylon.repository.OrderRepository;
 import lk.ac.eceylon.service.OrderDetailService;
 import lk.ac.eceylon.service.OrderService;
 import lk.ac.eceylon.service.ProductService;
@@ -106,5 +107,18 @@ public class OrderController {
 
         System.out.println(order);
         return orderService.confirmOrder(order);
+    }
+    //-------------------------------------------
+    @Autowired
+    OrderRepository or;
+
+    @GetMapping(value ="/order/test",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Orders> test(){
+//        System.out.println(order);
+//        return null;
+//        return or.findOrdersByOrderdate();
+            return null;
+//        return or.findOrdersByDateMonthBefore(1);
     }
 }

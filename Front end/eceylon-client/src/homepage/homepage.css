@@ -24,6 +24,13 @@
     font-size: 20px;
   }
   
+  #catStyle:hover{
+    background-color: rgb(142, 143, 142);
+  }
+  #catStyle{
+    background: #7386D5;
+    border-color : #7386D5
+  }
   /* Closable button inside the image */
   .closebtn {
     position: absolute;

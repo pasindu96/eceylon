@@ -71,7 +71,7 @@ class Viewproduct extends Component{
         })
     }
 
-     renderTableData() {
+    renderTableData() {
         return this.state.products.map((product, index) => {
            const { productID, description, displayName, price,delivery_area,qty_on_hand,categoryid } = product 
            return (
