@@ -1,6 +1,9 @@
 package lk.ac.eceylon.service.impl;
 
+import lk.ac.eceylon.entity.Category;
 import lk.ac.eceylon.entity.Search;
+import lk.ac.eceylon.repository.CategoryRepository;
+import lk.ac.eceylon.repository.ProductRepository;
 import lk.ac.eceylon.repository.SearchRepository;
 import lk.ac.eceylon.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +54,26 @@ public class SearchServiceImpl implements SearchService {
             return 1;
         else
             return mostSearchedCategoryID;
+    }
+
+    @Autowired
+    CategoryRepository categoryRepository;
+
+    @Override
+    public String mostSearchedCategory() {
+        int category=0;
+        int count=0;
+        int tempCount=0;
+        for (int catID:categoryRepository.getCategoryID()) {
+            tempCount=0;
+            tempCount=searchRepository.countSearchByCategoryIDEquals(catID);
+//            System.out.println(tempCount);
+            if(count<tempCount){
+                count=tempCount;
+                category=catID;
+            }
+        }
+        Category categoryDetails =categoryRepository.findById(category).get();
+        return (categoryRepository.findById(category).get()).getCategory();
     }
 }

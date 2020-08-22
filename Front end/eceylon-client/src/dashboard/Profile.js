@@ -67,6 +67,7 @@ class Profile extends Component{
                     value.length < 4
                     ? 'New Password Should contain at least 4 charactors !'
                     :'';
+                    break;
             default:
                 break;
         }
@@ -102,6 +103,9 @@ class Profile extends Component{
     }
 
     async componentDidMount(){
+        if(localStorage.getItem('email')==="logout")
+            window.location.href="/";
+            
         axios.get(`http://localhost:8080/api/eceylon/user/id=`+localStorage.getItem('email').toString())
         .then(res => {
             this.setState({

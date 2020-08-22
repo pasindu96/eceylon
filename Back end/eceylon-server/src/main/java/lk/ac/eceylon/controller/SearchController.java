@@ -2,6 +2,8 @@ package lk.ac.eceylon.controller;
 
 import lk.ac.eceylon.entity.Product;
 import lk.ac.eceylon.entity.Search;
+import lk.ac.eceylon.repository.CategoryRepository;
+import lk.ac.eceylon.repository.SearchRepository;
 import lk.ac.eceylon.service.CategoryService;
 import lk.ac.eceylon.service.ProductService;
 import lk.ac.eceylon.service.SearchService;
@@ -40,5 +42,10 @@ public class SearchController {
         }
         System.out.println(catID);
         return catID;
+    }
+
+    @GetMapping(value="/search/category")
+    public String test(){
+        return searchService.mostSearchedCategory();
     }
 }

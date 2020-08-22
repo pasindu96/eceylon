@@ -1,5 +1,6 @@
 package lk.ac.eceylon.controller;
 
+import lk.ac.eceylon.dto.ChangePasswordDTO;
 import lk.ac.eceylon.dto.UserDTO;
 import lk.ac.eceylon.entity.User;
 import lk.ac.eceylon.service.UserService;
@@ -41,5 +42,16 @@ public class UserController {
     public User findByemail(@PathVariable(value = "id")  String id) throws Exception {
         id=id.replace("id=","");
         return userService.findByemail(id);
+    }
+    @PostMapping(value="/user/update",consumes= MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public boolean updateUser(@RequestBody User user){
+        System.out.println(user);
+        return userService.updateUser(user);
+    }
+    @PostMapping(value="/user/update/password",consumes= MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String changePassword(@RequestBody ChangePasswordDTO dto){
+        return userService.updatePassWord(dto);
     }
 }

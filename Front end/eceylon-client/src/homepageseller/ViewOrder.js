@@ -12,6 +12,8 @@ class ViewOrder extends Component{
         };
     }
     async componentDidMount(){
+        if(localStorage.getItem('email')==="logout")
+            window.location.href="/";
 
         axios.get(`http://localhost:8080/api/eceylon/orders/email=`+localStorage.getItem('email').toString())
         .then(res => {
@@ -21,6 +23,9 @@ class ViewOrder extends Component{
                 })
         })
 
+    }
+    logOut(event){
+        localStorage.setItem('email','logout');
     }
     renderTableData() {
         return this.state.orders.map((order, index) => {
@@ -90,7 +95,7 @@ class ViewOrder extends Component{
                                     <a href="/report">Income Reports</a>
                                 </li>
                                 <li>
-                                    <a href="/login">Log out</a>
+                                    <a href="/" onClick={(e) => {this.logOut(e)}}>Log out</a>
                                 </li>
                             </ul>
                         </nav>

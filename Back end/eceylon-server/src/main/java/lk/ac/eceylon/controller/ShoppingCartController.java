@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,5 +44,11 @@ public class ShoppingCartController {
             }
         }
         return cartList;
+    }
+
+    @GetMapping(value = "/cart/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public boolean deleteProduct(@PathVariable("id")String id){
+        id=id.replace("id=","");
+        return cartService.deleteItem(Integer.parseInt(id));
     }
 }

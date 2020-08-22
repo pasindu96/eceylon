@@ -19,9 +19,13 @@ class ProductCart extends Component{
         };
     }
     
+    logOut(event){
+        localStorage.setItem('email','logout');
+    }
 
     async componentDidMount(){
-        
+        if(localStorage.getItem('email')==="logout")
+            window.location.href="/";
         // const user = {
         //     pid : []
         // };
@@ -55,11 +59,24 @@ class ProductCart extends Component{
                     <td>{displayName}</td>
                     <td>{unitPrice}</td>
                     <td>{orderQty}</td>
-                    <td><button>Remove</button></td>
+                    <td><button onClick={() => this.onDelete(cartID)}>Remove</button></td>
                 </tr>
            )
         })
      
+    }
+
+    onDelete(cartID){
+        // alert(cartID);
+        axios.get(`http://localhost:8080/api/eceylon/cart/delete/id=`+cartID)
+        .then(res => {
+            if(res.data==true){
+                alert("Item removed successfully..");
+                window.location.reload();
+            }else{
+                alert("Error occured..");
+            }
+        })
     }
 
     handleChange = e => {

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,6 +30,18 @@ public class ProductImageController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ProductImage> productDescription(@PathVariable("id") String id){
         return productImageService.getProduct(Integer.parseInt(id.replace("id=", "")));
+    }
+
+    @GetMapping(value="/get/image/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<String> productImages(@PathVariable("id") String id){
+        List<String> imageList=new ArrayList<String>();
+        for (ProductImage image : productImageService.getProduct(Integer.parseInt(id.replace("id=", "")))) {
+            System.out.println("./"+image.getImageurl());
+            imageList.add(image.getImageurl());
+        }
+
+        return imageList;
     }
 //    @GetMapping(value="/image/{id}",consumes= MediaType.APPLICATION_JSON_VALUE,
 //            produces = MediaType.APPLICATION_JSON_VALUE)

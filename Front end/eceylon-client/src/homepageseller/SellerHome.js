@@ -1,6 +1,16 @@
 import React,{Component} from 'react';
 
 class SellerHome extends Component{
+
+    async componentDidMount(){
+        if(localStorage.getItem('email')==="logout")
+            window.location.href="/";
+    }
+
+    logOut(event){
+        localStorage.setItem('email','logout');
+    }
+
     render(){
         return(
             <div className="wrapper">
@@ -22,7 +32,7 @@ class SellerHome extends Component{
                             <a href="/report">Income Reports</a>
                         </li>
                         <li>
-                            <a href="/login">Log out</a>
+                            <a href="/" onClick={(e) => {this.logOut(e)}}>Log out</a>
                         </li>
                     </ul>
                 </nav>

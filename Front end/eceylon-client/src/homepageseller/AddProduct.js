@@ -20,6 +20,16 @@ class AddProduct extends Component{
             email:localStorage.getItem('email').toString()
         };
     }
+
+    async componentDidMount(){
+        if(localStorage.getItem('email')==="logout")
+            window.location.href="/";
+    }
+
+    logOut(event){
+        localStorage.setItem('email','logout');
+    }
+    
     onChange = e => {
         this.setState({
              [e.target.id]: e.target.value 
@@ -119,7 +129,7 @@ class AddProduct extends Component{
                                     <a href="/report">Income Reports</a>
                                 </li>
                                 <li>
-                                    <a href="/login">Log out</a>
+                                    <a href="/" onClick={(e) => {this.logOut(e)}}>Log out</a>
                                 </li>
                             </ul>
                         </nav>

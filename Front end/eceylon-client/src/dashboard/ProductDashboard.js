@@ -14,6 +14,9 @@ class ProductDashboard extends Component{
     }
     
     async componentDidMount(){
+        if(localStorage.getItem('email')==="logout")
+            window.location.href="/";
+        
         axios.get('http://localhost:8080/api/eceylon/search/category')
         .then(res=>{
             this.setState({
@@ -40,6 +43,9 @@ class ProductDashboard extends Component{
         //         //data is here
         //     })
         // })
+    }
+    logOut(event){
+        localStorage.setItem('email','logout');
     }
 
     onChange = e => {
@@ -76,7 +82,7 @@ class ProductDashboard extends Component{
                             <a href="/homepage">Homepage</a>
                         </li>
                         <li>
-                            <a href="/login">Log out</a>
+                            <a href="/" onClick={(e) => {this.logOut(e)}}>Log out</a>
                         </li>
                     </ul>
                 </nav>

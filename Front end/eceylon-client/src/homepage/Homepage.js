@@ -10,9 +10,23 @@ import axios from "axios";
 class D extends Component{
     
     async componentDidMount(){
-        // alert(localStorage.getItem('categoryid'));
-
+        if(localStorage.getItem('email')==="logout")
+            window.location.href="/";
         
+        // if(localStorage.getItem('categoryid')==='1'){
+            
+        //     // for(var i=0;i<8;i++){
+
+        //         this.setState({
+        //             cr:this.state.cat1[0].toString()
+        //         })
+        //     // }
+        //     console.log(this.state.cr)
+        // }else{
+        //     this.setState({
+        //         currentimage:this.state.cat2
+        //     })
+        // }
         const user = {
             pid : []
         };
@@ -21,18 +35,27 @@ class D extends Component{
                 // alert(localStorage.getItem('categoryid').toString());
                 axios.get(`http://localhost:8080/api/eceylon/productl/id=`+localStorage.getItem('categoryid').toString())
                 .then(res => {
-                    console.log(res.data);
-                    this.setState({
-                        testdata: res.data
-                    })
+                    // console.log(res.data);
+                    // this.setState({
+                    //     testdata: res.data
+                    // })
                     
                     //this.products=res.data;
-                    //console.log(res);
+                    console.log(res);
                     for(var i=0;i<=res.data.length-1;i++){
                     // console.log(res.data[i]);
-                    this.state.displayName.push(res.data[i].displayName);
-                    this.state.unitPrice.push("SLR " + res.data[i].price + ".00");
-                    this.state.productID.push(res.data[i].productID);
+                    // this.state.displayName.push(res.data[i].displayName);
+                    // this.state.unitPrice.push("SLR " + res.data[i].price + ".00");
+                    // this.state.productID.push(res.data[i].productID);
+                    // this.state.beep.push(res.data[i].image+"");
+                    this.setState(prevState => ({
+                        displayName: [...prevState.displayName, res.data[i].displayName],
+                        unitPrice: [...prevState.unitPrice, "SLR " + res.data[i].price + ".00"],
+                        productID: [...prevState.productID, res.data[i].productID],
+                        images:[...prevState.images, res.data[i].image]
+
+                }))
+                
                     //    user.pid.push(res.data[i].productID);
 
                     //    this.state.lol.push("a");
@@ -57,41 +80,79 @@ class D extends Component{
                         // }
 
                         
+//--------------------------------------------------------------------------------------------
+                        // this.setState(prevState => ({
+                        //     beep: [...prevState.beep, res.data[i].image]
+                        //   }))
 
-                        this.setState({
-
-                            // names.push(res.data[i].displayName);
-                        })
+//--------------------------------------------------------------------------------------------
+                        
+                        // this.setState({
+                        //     images:res.data[i].image
+                            
+                        //     // names.push(res.data[i].displayName);
+                        // })
                     }
+                    console.log(this.state.images)
+                    // console.log(this.state.beep);
+                    // this.setState({
+                    //         lol:this.state.images
+                            
+                    //         // names.push(res.data[i].displayName);
+                    //     })
+                    // console.log(this.state.lol);
+
                     //user.pid=this.state.productID;
                     // this.setState(prevState => ({ productID: 2 }));
                 })
+
+                // axios.get('http://localhost:8080/api/eceylon/p')
+                // .then(resu=>{
+                //     this.setState({
+                //         testdata:resu.data
+                //     })
+                //     console.log(resu.data)
+
+                // })
+                console.log(this.state.beep);
+
             };break;
             case "1": {
                 axios.get(`http://localhost:8080/api/eceylon/products/filter/id=`+localStorage.getItem('categoryid').toString())
                 .then(res => {
-                    console.log(res.data);
-                    this.setState({
-                        testdata: res.data
-                    })
+                    // console.log(res.data);
+                    // this.setState({
+                    //     testdata: res.data
+                    // })
                     
                     //this.products=res.data;
                     //console.log(res);
                     for(var i=0;i<=res.data.length-1;i++){
                     // console.log(res.data[i]);
-                    this.state.displayName.push(res.data[i].displayName);
-                    this.state.unitPrice.push("SLR " + res.data[i].price + ".00");
-                    this.state.productID.push(res.data[i].productID);
+                    // this.state.displayName.push(res.data[i].displayName);
+                    // this.state.unitPrice.push("SLR " + res.data[i].price + ".00");
+                    // this.state.productID.push(res.data[i].productID);
+                    // // this.state.images.push(res.data[i].image);
+                    // this.state.images.push(res.data[i].image.toString());
+
+                    this.setState(prevState => ({
+                            displayName: [...prevState.displayName, res.data[i].displayName],
+                            unitPrice: [...prevState.unitPrice, "SLR " + res.data[i].price + ".00"],
+                            productID: [...prevState.productID, res.data[i].productID],
+                            images:[...prevState.images, res.data[i].image]
+                    }))
+
                     //    user.pid.push(res.data[i].productID);
 
-                        this.setState({
+                        // this.setState({
 
-                            // names.push(res.data[i].displayName);
-                        })
+                        //     // names.push(res.data[i].displayName);
+                        // })
                     }
                     //user.pid=this.state.productID;
                     // this.setState(prevState => ({ productID: 2 }));
                 })
+                console.log(this.state.displayName);
             };break;
             default: break;
         }
@@ -120,7 +181,12 @@ class D extends Component{
             qty_on_hand:[],
             images:[],
             lol:[],
-            testdata:[]
+            testdata:[],
+            beep:["resources/cake1.jpg","resources/cake2.jpg"],
+            cat1:["resources/cake2.jpg","resources/cake1.jpg","resources/cake10.jpg","resources/cake4.jpg","resources/cake5.jpg","resources/cake6.jpg","resources/cake7.jpg","resources/cake8.jpg"],
+            cat2:["resources/ring2.jpg","resources/ring3.jpg","resources/chain1.jpg","resources/chain2.jpg","resources/earings1.jpg","resources/neckless1.jpg","resources/neckless2.jpg","resources/jewellery.jpg"],
+            currentimage:[],
+            cr:''
         }
     }
     onClick(event,val){
@@ -225,7 +291,7 @@ class D extends Component{
                                 <div className="col-3">
                                     <div className="card" >
                                         {/* src={require('../resources/b1.jpg')} */}
-                                        <img className="bd-placeholder-img card-img-top" width="100%" height="180" src=""  alt="Image 1"/>
+                                        <img className="bd-placeholder-img card-img-top" width="100%" height="180" src={require("./"+this.state.cat1[0])}  alt="Image 1"/>
                                         <div className="card-body">
                                             <h5 className="card-title">{this.state.displayName[0]}</h5>
                                             <p className="card-text">{this.state.unitPrice[0]}</p>
@@ -235,7 +301,7 @@ class D extends Component{
                                 </div>
                                 <div className="col-3">
                                     <div className="card" >
-                                    <img className="bd-placeholder-img card-img-top" width="100%" height="180" src=""  alt="Image 2"/>
+                                    <img className="bd-placeholder-img card-img-top" width="100%" height="180" src={require("./"+this.state.cat1[1])} alt="Image 2"/>
                                         <div className="card-body">
                                             <h5 className="card-title">{this.state.displayName[1]}</h5>
                                             <p className="card-text">{this.state.unitPrice[1]}</p>
@@ -245,7 +311,7 @@ class D extends Component{
                                 </div>
                                 <div className="col-3">
                                     <div className="card" >
-                                        <img className="bd-placeholder-img card-img-top" width="100%" height="180" src=""  alt="Image 3"/>
+                                        <img className="bd-placeholder-img card-img-top" width="100%" height="180" src={require("./"+this.state.cat1[2])}  alt="Image 3"/>
                                         <div className="card-body">
                                             <h5 className="card-title">{this.state.displayName[2]}</h5>
                                             <p className="card-text">{this.state.unitPrice[2]}</p>
@@ -255,7 +321,7 @@ class D extends Component{
                                 </div>
                                 <div className="col-3">
                                     <div className="card" >
-                                        <img className="bd-placeholder-img card-img-top" width="100%" height="180" src=""  alt="Image 4"/>
+                                        <img className="bd-placeholder-img card-img-top" width="100%" height="180" src={require("./"+this.state.cat1[3])}  alt="Image 4"/>
                                         <div className="card-body">
                                             <h5 className="card-title">{this.state.displayName[3]}</h5>
                                             <p className="card-text">{this.state.unitPrice[3]}</p>
@@ -268,7 +334,7 @@ class D extends Component{
                         <div className="row">
                                 <div className="col-3">
                                     <div className="card" >
-                                        <img className="bd-placeholder-img card-img-top" width="100%" height="180" src=""  alt="Image 5"/>
+                                        <img className="bd-placeholder-img card-img-top" width="100%" height="180" src={require("./"+this.state.cat1[4])}  alt="Image 5"/>
                                         <div className="card-body">
                                             <h5 className="card-title">{this.state.displayName[4]}</h5>
                                             <p className="card-text">{this.state.unitPrice[4]}</p>
@@ -278,7 +344,7 @@ class D extends Component{
                                 </div>
                                 <div className="col-3">
                                     <div className="card" >
-                                        <img className="bd-placeholder-img card-img-top" width="100%" height="180" src=""  alt="Image 6"/>
+                                        <img className="bd-placeholder-img card-img-top" width="100%" height="180" src={require("./"+this.state.cat1[5])}  alt="Image 6"/>
                                         <div className="card-body">
                                             <h5 className="card-title">{this.state.displayName[5]}</h5>
                                             <p className="card-text">{this.state.unitPrice[5]}</p>
@@ -288,7 +354,7 @@ class D extends Component{
                                 </div>
                                 <div className="col-3">
                                     <div className="card" >
-                                    <img className="bd-placeholder-img card-img-top" width="100%" height="180" src=""  alt="Image 7"/>
+                                    <img className="bd-placeholder-img card-img-top" width="100%" height="180" src={require("./"+this.state.cat1[6])}  alt="Image 7"/>
                                         <div className="card-body">
                                             <h5 className="card-title">{this.state.displayName[6]}</h5>
                                             <p className="card-text">{this.state.unitPrice[6]}</p>
@@ -298,7 +364,7 @@ class D extends Component{
                                 </div>
                                 <div className="col-3">
                                     <div className="card" >
-                                        <img className="bd-placeholder-img card-img-top" width="100%" height="180" src=""  alt="Image 8"/>
+                                        <img className="bd-placeholder-img card-img-top" width="100%" height="180" src={require("./"+this.state.cat1[7])}  alt="Image 8"/>
                                         <div className="card-body">
                                             <h5 className="card-title">{this.state.displayName[7]}</h5>
                                             <p className="card-text">{this.state.unitPrice[7]}</p>

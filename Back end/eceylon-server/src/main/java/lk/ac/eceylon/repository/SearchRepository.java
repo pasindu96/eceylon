@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface SearchRepository extends JpaRepository<Search,Integer> {
     List<Search> findSearchByUserEmail(@Param("email") String email);
+    int countSearchByCategoryIDEquals(int categoryID);
 }

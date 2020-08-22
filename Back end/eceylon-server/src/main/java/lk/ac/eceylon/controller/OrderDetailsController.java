@@ -1,15 +1,21 @@
 package lk.ac.eceylon.controller;
 
+import lk.ac.eceylon.EceylonApplication;
 import lk.ac.eceylon.dto.OrderDetailDTO;
+import lk.ac.eceylon.dto.OrderProductDetailDTO;
+import lk.ac.eceylon.dto.PopularDataDTO;
 import lk.ac.eceylon.entity.OrderDetails;
 import lk.ac.eceylon.entity.Orders;
 import lk.ac.eceylon.entity.Product;
+import lk.ac.eceylon.repository.OrderDetailRepository;
 import lk.ac.eceylon.service.OrderDetailService;
 import lk.ac.eceylon.service.ShoppingCartService;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -47,5 +53,17 @@ public class OrderDetailsController {
 //        return true;
         cartService.updateCart(order.getCartid());
         return orderDetailService.saveOrderDetails(od);
+    }
+
+    @GetMapping(value ="/orderdetail/report",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public PopularDataDTO getPopularProductAndSeller(){
+        return orderDetailService.mostPopularSeller();
+    }
+
+    @GetMapping(value = "/orderdetail/view/{orderid}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<OrderProductDetailDTO> getOrderDetails(@PathVariable("orderid") String orderid){
+        System.out.println( orderDetailService.getOrderDetails(Integer.parseInt(orderid.replace("orderid=",""))));
+        return orderDetailService.getOrderDetails(Integer.parseInt(orderid.replace("orderid=","")));
     }
 }

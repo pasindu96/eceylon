@@ -89,6 +89,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> getFilteredProducts(int id) {
+
+        return productRepository.findProductByCategoryCategoryIDOrderByUnitPriceAsc(id);
+
+    }
+
+    @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public List<Product> getProductByUser(String email) {
         return productRepository.findProductByUserEmail(email);

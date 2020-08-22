@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import './dashboard.css';
 import axios from 'axios';
+import ColumnChart from './ReportGraph';
 
 
 class Dashboard extends Component{
@@ -12,6 +13,10 @@ class Dashboard extends Component{
             income:'',
             time_period:'daily'
         }
+    }
+    async componentDidMount(){
+        if(localStorage.getItem('email')==="logout")
+            window.location.href="/";
     }
 
     onSubmit = e => {
@@ -26,6 +31,10 @@ class Dashboard extends Component{
                 //data is here
             })
         })
+    }
+    
+    logOut(event){
+        localStorage.setItem('email','logout');
     }
 
     onChange = e => {
@@ -62,7 +71,7 @@ class Dashboard extends Component{
                             <a href="/homepage">Homepage</a>
                         </li>
                         <li>
-                            <a href="/login">Log out</a>
+                            <a href="/" onClick={(e) => {this.logOut(e)}}>Log out</a>
                         </li>
                     </ul>
                 </nav>
@@ -114,7 +123,17 @@ class Dashboard extends Component{
                                     </div>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
+                        <div className="row">
+                            <div className="col-sm-12 col-md-10 mx-auto">
+                                <div className="card card-signin my-10">
+                                    <div className="card-body">
+                                        <h5 className="card-title text-center">ECEYLON.LK <br/>Sales Report Graphical view</h5> 
+                                        <ColumnChart/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
         )

@@ -51,4 +51,18 @@ public class ShoppingCartImpl implements ShoppingCartService {
         cartRepo.save(cartToUpdate);
         return true;
     }
+
+    @Override
+    public boolean deleteItem(int cartID) {
+        ShoppingCart cartToUpdate=cartRepo.getOne(cartID);
+        cartToUpdate.setStatus("Deleted");
+
+        Product productToUpdate=productRepository.getOne(cartToUpdate.getProduct().getProductID());
+        productToUpdate.setQty_on_hand(productToUpdate.getQty_on_hand()+cartToUpdate.getQuantity());
+        productRepository.save(productToUpdate);
+        if(cartRepo.save(cartToUpdate)!=null)
+            return true;
+        else
+            return false;
+    }
 }

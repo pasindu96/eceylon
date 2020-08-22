@@ -17,6 +17,7 @@ import Indexpage from './homepage/Index';
 import Viewproduct from './homepageseller/Viewproduct';
 import Profile from './dashboard/Profile';
 import ProductDashboard from './dashboard/ProductDashboard';
+import ColumnChart from './dashboard/ReportGraph';
 
 
 
@@ -40,6 +41,7 @@ class App extends Component{
           <Route path="/index" exact component={Indexpage}/>
           <Route path="/viewproduct" exact component={Viewproduct}/>
           <Route path="/profile" exact component={Profile}/>
+          <Route path="/t" exact component={ColumnChart}/>
       </Router>
     )
   }

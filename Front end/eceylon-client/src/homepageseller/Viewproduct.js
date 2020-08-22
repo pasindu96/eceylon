@@ -25,7 +25,13 @@ class Viewproduct extends Component{
         }
      }
 
+    logOut(event){
+        localStorage.setItem('email','logout');
+    }
+
     async componentDidMount(){
+        if(localStorage.getItem('email')==="logout")
+            window.location.href="/";
         // const user = {
         //     pid : []
         // };
@@ -139,7 +145,7 @@ class Viewproduct extends Component{
                             <a href="/report">Income Reports</a>
                         </li>
                         <li>
-                            <a href="/login">Log out</a>
+                            <a href="/" onClick={(e) => {this.logOut(e)}}>Log out</a>
                         </li>
                     </ul>
                 </nav>

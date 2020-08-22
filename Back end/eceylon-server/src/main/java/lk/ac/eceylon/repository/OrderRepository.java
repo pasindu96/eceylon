@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Orders,Integer> {
@@ -12,9 +13,7 @@ public interface OrderRepository extends JpaRepository<Orders,Integer> {
     List<Orders> findOrdersByOrderidAndStatus(@PathVariable("orderid")int orderid, @PathVariable("status")String status);
     List<Orders> findOrdersByOrderid(@PathVariable("orderid")int orderid);
 
-//    @Query
-//    @Query("SELECT oid FROM orders WHERE orderdate >= (CURDATE() + INTERVAL -7 DAY)")
-//    List<Orders> findOrdersByOrderdate();
+    List<Orders> findByOrderdateBetween(Timestamp start,Timestamp end);
+    List<Orders> findOrdersByUserEmail(String email);
 
-//    List<Orders> findOrdersByOrderdate();
 }

@@ -16,6 +16,13 @@ class NavBar extends Component{
         };
         // alert(this.username);
     }
+    async componentDidMount(){
+        if(localStorage.getItem('email')==="logout")
+            window.location.href="/";
+    }
+    logout=e=>{
+        localStorage.setItem('email','logout');
+    }
 
     onChange = e => {
         this.setState({
@@ -139,7 +146,7 @@ class NavBar extends Component{
                         </li>
                     
                         <li className="nav-item dropdown">
-                            <a href="/" type="button" className="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">
+                            <a href="/" type="button" className="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light" onClick={this.logout}>
                                 Logout
                             </a>
                             {/* <ul className="dropdown-menu">

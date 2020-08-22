@@ -6,5 +6,6 @@ public interface SearchService {
 
     boolean saveSearchResults(Search search);
     int mostSearchedCategory(String email);
+    String mostSearchedCategory();
 
 }

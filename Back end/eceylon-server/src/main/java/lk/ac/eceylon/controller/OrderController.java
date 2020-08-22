@@ -1,19 +1,24 @@
 package lk.ac.eceylon.controller;
 
+import lk.ac.eceylon.dto.AdminIncomeDTO;
+import lk.ac.eceylon.dto.MonthlyReportDTO;
 import lk.ac.eceylon.dto.UserOrdersDTO;
 import lk.ac.eceylon.entity.OrderDetails;
 import lk.ac.eceylon.entity.Orders;
 import lk.ac.eceylon.entity.Product;
+import lk.ac.eceylon.repository.OrderDetailRepository;
 import lk.ac.eceylon.repository.OrderRepository;
 import lk.ac.eceylon.service.OrderDetailService;
 import lk.ac.eceylon.service.OrderService;
 import lk.ac.eceylon.service.ProductService;
+import lk.ac.eceylon.service.impl.MailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -43,8 +48,7 @@ public class OrderController {
         List<Product> proList= productService.getProductByUser(email.replace("email=",""));
         List<OrderDetails> odList=null;
         List<UserOrdersDTO> orderList=new ArrayList<UserOrdersDTO>();
-//        UserOrdersDTO order;
-        //System.out.println(proList);
+
         for (Product product:proList) {
 //            odList.removeAll(odList);
 
@@ -55,12 +59,6 @@ public class OrderController {
             odList=orderDetailService.getOrderIDFromProductID(product.getProductID());
 
             for(OrderDetails od: odList){
-
-//                order.setQuantity(od.getQuantity());
-                //7 ---> 6 orders
-                //System.out.println(od.getProduct().getProductID());
-//This also worked -> returned order ids
-//                System.out.println(od.getOrder().getOrderid());
 
                 System.out.println(od.getOrder().getOrderid()+" ------");
 //                List<Orders> olist=orderService.getOrdersByOrderIDAndStatus(od.getOrder().getOrderid());
@@ -89,15 +87,10 @@ public class OrderController {
                     System.out.println(orderList);
 
                 }
-
-
-                //System.out.println(orderService.getOrdersByOrderIDAndStatus(od.getOrder().getOrderid()));
             }
         }
         //System.out.println(orderService.getOrdersByOrderIDAndStatus(3));
-
         return orderList;
-//        return null;
     }
     @PostMapping(value ="/order/confirm",consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -108,17 +101,48 @@ public class OrderController {
         System.out.println(order);
         return orderService.confirmOrder(order);
     }
-    //-------------------------------------------
-    @Autowired
-    OrderRepository or;
 
-    @GetMapping(value ="/order/test",
+    @GetMapping(value ="/order/income/{period}",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Orders> test(){
-//        System.out.println(order);
-//        return null;
-//        return or.findOrdersByOrderdate();
-            return null;
-//        return or.findOrdersByDateMonthBefore(1);
+    public AdminIncomeDTO getOrdersByPeriod(@PathVariable("period")String period){
+        return orderService.getIncome(period.replace("period=",""));
     }
+
+    @GetMapping(value="/order/buyer/{email}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Orders> getAllOrdersByEmail(@PathVariable("email") String email){
+        return orderService.getOrdersByUserEmail(email.replace("email=",""));
+    }
+
+    @GetMapping(value = "/graph",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<MonthlyReportDTO> sample(){
+        List<MonthlyReportDTO> list= orderService.getIncomePerMonth();
+        Collections.reverse(list);
+        return list;
+    }
+
+//    @Autowired
+//    OrderDetailRepository od;
+
+    @GetMapping(value="/order/product/{productid}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<MonthlyReportDTO> getProductOrdersDuringYear(@PathVariable("productid") String productid){
+        productid=productid.replace("productid=","");
+        System.out.println(productid);
+        return orderDetailService.countOrdersByProductID(Integer.parseInt(productid));
+
+    }
+
+    // To be implement
+    @GetMapping(value = "/order/seller/income/{email}/{period}",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public AdminIncomeDTO getIncomeBySeller(@PathVariable("email")String email,@PathVariable("period") String period){
+        email=email.replace("email=","");
+        period=period.replace("period=","");
+//        System.out.println(email+ " " + period);
+//        System.out.println(orderDetailService.getIncomeBySeller(email,period));
+//        return null;
+        return orderDetailService.getIncomeBySeller(email,period);
+    }
+
 }

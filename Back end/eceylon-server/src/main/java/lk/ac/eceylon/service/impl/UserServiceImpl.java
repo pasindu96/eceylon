@@ -1,9 +1,11 @@
 package lk.ac.eceylon.service.impl;
 
+import lk.ac.eceylon.dto.ChangePasswordDTO;
 import lk.ac.eceylon.dto.UserDTO;
 import lk.ac.eceylon.entity.User;
 import lk.ac.eceylon.repository.UserRepository;
 import lk.ac.eceylon.service.UserService;
+import lk.ac.eceylon.validation.ValidateUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -37,6 +39,10 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public boolean saveUser(UserDTO newUser) {
+        ValidateUser validate=new ValidateUser();
+        if(!validate.validate(newUser))
+            return false;
+
         User user=new User();
         user.setUsername(newUser.getUsername());
         user.setPassword(newUser.getPassword());
@@ -46,8 +52,11 @@ public class UserServiceImpl implements UserService {
         user.setEmail(newUser.getEmail());
         user.setType(newUser.getType());
 
-        userRepository.save(user);
-        return true;
+        if(userRepository.save(user)!=null)
+            return true;
+        else
+            return false;
+
     }
 
 
@@ -66,6 +75,32 @@ public class UserServiceImpl implements UserService {
             User u=new User();
             u.setEmail("No user");
             return u;
+        }
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        User userToUpdate= userRepository.getOne(user.getEmail());
+        userToUpdate.setFullname(user.getFullname());
+        userToUpdate.setAddress(user.getAddress());
+        userToUpdate.setMobile(user.getMobile());
+        if(userRepository.save(userToUpdate)!=null)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public String updatePassWord(ChangePasswordDTO dto) {
+
+        if(dto.getCurrentPassword().equals(userRepository.findById(dto.getEmail()).get().getPassword())){
+            User userToUpdate= userRepository.getOne(dto.getEmail());
+            userToUpdate.setPassword(dto.getNewPassword());
+            userRepository.save(userToUpdate);
+            return "Password updated successfully...";
+
+        }else{
+            return "Please check the current password and proceed !";
         }
     }
 }

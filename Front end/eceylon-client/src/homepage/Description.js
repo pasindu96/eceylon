@@ -18,16 +18,24 @@ class Description extends Component{
             qty:"",
             price: "",
             status:"No"  ,
-            useremail:""
+            useremail:"", 
+            t:false,
+            img1:"./resources/cake1.jpg",
+            img2:"",
+            img3:""
         }
     }
 
     async componentDidMount(){
+        if(localStorage.getItem('email')==="logout")
+            window.location.href="/";
+            
         axios.get(`http://localhost:8080/api/eceylon/product/id=`+this.state.productID)
         .then(res => {
             this.setState({
                 products: res.data
             })
+
 
             if(res.data!== ""){
                 
@@ -46,7 +54,8 @@ class Description extends Component{
                     displayName:(res.data.displayName),
                     description:(res.data.description),
                     deliveryArea:(res.data.delivery_Area),
-                    useremail:(res.data.user.fullname)
+                    useremail:(res.data.user.fullname),
+                    t:(res.data.qty_on_hand)===0 ? true : false
                 })
                 
 
@@ -73,6 +82,18 @@ class Description extends Component{
             // }
             console.log(res.data);
         })
+
+        axios.get(`http://localhost:8080/api/eceylon/get/image/id=`+this.state.productID)
+        .then(res => {
+            console.log(res.data[0]);
+            this.setState({
+                img1:res.data[0].toString(),
+                img1:res.data[1],
+                img1:res.data[2]
+
+            })
+        })
+        console.log(this.state.img1)
     }
 
     onChange = e => {
@@ -130,12 +151,12 @@ class Description extends Component{
                             <div className="preview col-md-6">
                                 
                                 <div className="preview-pic tab-content">
-                                    <div className="tab-pane active" id="pic1"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRYUYUEWGnH9d-McQZWhbM-_e6l_Ie2iW0KCfwsl3thLIeRo9bI&usqp=CAU"/></div>
+                                    <div className="tab-pane active" id="pic1"><img src={require("./resources/cake2.jpg")}/></div>
                                 </div>
                                 <ul className="preview-thumbnail nav nav-tabs">
-                                    <li><a data-target="#pic1" data-toggle="tab" ><img id="pic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRYUYUEWGnH9d-McQZWhbM-_e6l_Ie2iW0KCfwsl3thLIeRo9bI&usqp=CAU"  /></a></li>
-                                    <li><a data-target="#pic2" data-toggle="tab"><img id="pic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRYUYUEWGnH9d-McQZWhbM-_e6l_Ie2iW0KCfwsl3thLIeRo9bI&usqp=CAU" /></a></li>
-                                    <li><a data-target="#pic3" data-toggle="tab"><img id="pic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRYUYUEWGnH9d-McQZWhbM-_e6l_Ie2iW0KCfwsl3thLIeRo9bI&usqp=CAU" /></a></li>
+                                    <li><a data-target="#pic1" data-toggle="tab" ><img id="pic" src={require("./resources/cake2.jpg")} /></a></li>
+                                    <li><a data-target="#pic2" data-toggle="tab"><img id="pic" src={require("./resources/cake2.jpg")} /></a></li>
+                                    <li><a data-target="#pic3" data-toggle="tab"><img id="pic" src={require("./resources/cake2.jpg")} /></a></li>
                                 </ul>
                                 
                             </div>
@@ -162,9 +183,9 @@ class Description extends Component{
                                     
                                     <form style={{width:'1000px'}} onSubmit={this.onSubmit}>
                                     <h4 className="price">Quantity : <input type="number" id="qty" name="qty" min="0" max={this.state.qty_on_hand} onChange={this.onChange} required/></h4>
-                                    <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong></strong></p>
+                                    {/* <p className="vote"><strong>91%</strong> of buyers enjoyed this product! <strong></strong></p> */}
                                         <div className="col-md-4">
-                                            <button className="add-to-cart btn btn-default" type="submit" style={{width:'200px'}} >Add to cart</button>
+                                            <button className="add-to-cart btn btn-default" type="submit" style={{width:'200px'}} disabled={this.state.t} >Add to cart</button>
                                         </div>
                                     </form>
                                     

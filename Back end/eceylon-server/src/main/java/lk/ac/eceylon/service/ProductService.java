@@ -16,4 +16,6 @@ public interface ProductService {
     List<Product> getProductByUser(String email);
     List<Product> getAllProducts();
     boolean updateProduct(Product product);
+    List<Product> getFilteredProducts(int id);
+
 }
