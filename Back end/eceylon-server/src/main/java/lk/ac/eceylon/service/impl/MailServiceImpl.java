@@ -25,7 +25,7 @@ public class MailServiceImpl {
         //Create a new Session
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("eceylonlk@gmail.com", "eceylon123");
+                return new PasswordAuthentication("emailaddress", "password");
             }
         });
 
